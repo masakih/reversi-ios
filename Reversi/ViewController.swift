@@ -106,12 +106,8 @@ extension ViewController {
         )
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in })
         alertController.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-            
-            guard let self = self else { return }
-            
-            // TODO: boarに対してresetを呼ぶだけにする
-            self.reversiEngine.newGame()
-            self.reversiEngine.waitForPlayer()
+
+            self?.reversiEngine.reset()
         })
         present(alertController, animated: true)
     }

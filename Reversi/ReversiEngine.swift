@@ -258,6 +258,15 @@ extension ReversiEngine {
             newGame()
         }
     }
+    
+    /// リセットを行う
+    func reset() {
+        
+        newGame()
+        
+        // TODO: ↓ これ必要？
+        waitForPlayer()
+    }
     /// ゲームの状態を初期化し、新しいゲームを開始します。
     func newGame() {
         boardView.reset()
