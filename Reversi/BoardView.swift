@@ -35,6 +35,16 @@ public class BoardView: UIView {
         setUp()
     }
     
+    public var allCells: [(Int, Int)] {
+        
+        yRange.flatMap { y in xRange.map { x in (x, y) } }
+    }
+    
+    public var allLines: [[(Int, Int)]] {
+        
+        yRange.map { y in xRange.map { x in (x, y) } }
+    }
+    
     private func setUp() {
         self.backgroundColor = UIColor(named: "DarkColor")!
         

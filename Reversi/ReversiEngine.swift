@@ -84,17 +84,11 @@ extension ReversiEngine {
     /// - Parameter side: 数えるディスクの色です。
     /// - Returns: `side` で指定された色のディスクの、盤上の枚数です。
     func countDisks(of side: Disk) -> Int {
-        var count = 0
-        
-        for y in boardView.yRange {
-            for x in boardView.xRange {
-                if boardView.diskAt(x: x, y: y) == side {
-                    count +=  1
-                }
-            }
+
+        boardView.allCells
+            .reduce(0) { t, vector in
+                boardView.diskAt(x: vector.0, y: vector.1) == side ? t + 1 : t
         }
-        
-        return count
     }
     
     /// 盤上に置かれたディスクの枚数が多い方の色を返します。
@@ -164,17 +158,12 @@ extension ReversiEngine {
     /// `side` で指定された色のディスクを置ける盤上のセルの座標をすべて返します。
     /// - Returns: `side` で指定された色のディスクを置ける盤上のすべてのセルの座標の配列です。
     func validMoves(for side: Disk) -> [(x: Int, y: Int)] {
-        var coordinates: [(Int, Int)] = []
         
-        for y in boardView.yRange {
-            for x in boardView.xRange {
-                if canPlaceDisk(side, atX: x, y: y) {
-                    coordinates.append((x, y))
-                }
-            }
+        boardView.allCells
+            .reduce([]) { coordinates, vector in
+                
+                canPlaceDisk(side, atX: vector.0, y: vector.1) ? coordinates + [vector] : coordinates
         }
-        
-        return coordinates
     }
     
     /// `x`, `y` で指定されたセルに `disk` を置きます。
@@ -384,11 +373,14 @@ extension ReversiEngine {
         output += whitePlayer.rawValue.description
         output += "\n"
         
-        for y in boardView.yRange {
-            for x in boardView.xRange {
-                output += boardView.diskAt(x: x, y: y).symbol
-            }
-            output += "\n"
+        boardView.allLines
+            .forEach { line in
+                
+                line.forEach { cell in
+                    
+                    output += boardView.diskAt(x: cell.0, y: cell.1).symbol
+                }
+                output += "\n"
         }
         
         do {
