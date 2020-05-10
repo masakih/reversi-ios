@@ -14,7 +14,10 @@ protocol BoardDelegate: AnyObject {
     func beginComputerThinking(_ reversi: ReversiEngine, turn: Disk)
     func endComputerThinking(_ reversi: ReversiEngine, turn: Disk)
     
-    func willPass(_ reversi: ReversiEngine, turn: Disk)
+    
+    /// パスが発生した時に呼び出される
+    /// - Parameter completion: 処理が終わった時に呼び出す必要がある
+    func willPass(_ reversi: ReversiEngine, turn: Disk, completion: @escaping () -> Void)
 }
 
 final class ReversiEngine {
@@ -305,7 +308,7 @@ extension ReversiEngine {
                 
             } else {
                 
-                delegate?.willPass(self, turn: turn)
+                delegate?.willPass(self, turn: turn) { [weak self] in self?.nextTurn() }
                 
                 self.turn = turn
             }

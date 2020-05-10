@@ -138,17 +138,16 @@ extension ViewController: BoardDelegate {
         playerActivityIndicators[turn.index].stopAnimating()
     }
     
-    func willPass(_ reversi: ReversiEngine, turn: Disk) {
+    func willPass(_ reversi: ReversiEngine, turn: Disk, completion: @escaping () -> Void) {
         
         let alertController = UIAlertController(
             title: "Pass",
             message: "Cannot place a disk.",
             preferredStyle: .alert
         )
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default) { [weak self] _ in
-            
-            // TODO: これはBoardがやるべきこと
-            self?.reversiEngine.nextTurn()
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default) { _ in
+                        
+            completion()
         })
         present(alertController, animated: true)
     }
