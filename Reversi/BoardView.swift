@@ -67,59 +67,56 @@ public class BoardView: UIView {
             cellViews[0].widthAnchor.constraint(equalTo: cellViews[0].heightAnchor),
         ])
         
-        for y in yRange {
-            for x in xRange {
-                let topNeighborAnchor: NSLayoutYAxisAnchor
-                if let cellView = cellViewAt(x: x, y: y - 1) {
-                    topNeighborAnchor = cellView.bottomAnchor
-                } else {
-                    topNeighborAnchor = self.topAnchor
-                }
-                
-                let leftNeighborAnchor: NSLayoutXAxisAnchor
-                if let cellView = cellViewAt(x: x - 1, y: y) {
-                    leftNeighborAnchor = cellView.rightAnchor
-                } else {
-                    leftNeighborAnchor = self.leftAnchor
-                }
-                
-                let cellView = cellViewAt(x: x, y: y)!
+        allCells.forEach { (x, y) in
+            
+            let topNeighborAnchor: NSLayoutYAxisAnchor
+            if let cellView = cellViewAt(x: x, y: y - 1) {
+                topNeighborAnchor = cellView.bottomAnchor
+            } else {
+                topNeighborAnchor = self.topAnchor
+            }
+            
+            let leftNeighborAnchor: NSLayoutXAxisAnchor
+            if let cellView = cellViewAt(x: x - 1, y: y) {
+                leftNeighborAnchor = cellView.rightAnchor
+            } else {
+                leftNeighborAnchor = self.leftAnchor
+            }
+            
+            let cellView = cellViewAt(x: x, y: y)!
+            NSLayoutConstraint.activate([
+                cellView.topAnchor.constraint(equalTo: topNeighborAnchor, constant: lineWidth),
+                cellView.leftAnchor.constraint(equalTo: leftNeighborAnchor, constant: lineWidth),
+            ])
+            
+            if y == height - 1 {
                 NSLayoutConstraint.activate([
-                    cellView.topAnchor.constraint(equalTo: topNeighborAnchor, constant: lineWidth),
-                    cellView.leftAnchor.constraint(equalTo: leftNeighborAnchor, constant: lineWidth),
+                    self.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: lineWidth),
                 ])
-                
-                if y == height - 1 {
-                    NSLayoutConstraint.activate([
-                        self.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: lineWidth),
-                    ])
-                }
-                if x == width - 1 {
-                    NSLayoutConstraint.activate([
-                        self.rightAnchor.constraint(equalTo: cellView.rightAnchor, constant: lineWidth),
-                    ])
-                }
+            }
+            if x == width - 1 {
+                NSLayoutConstraint.activate([
+                    self.rightAnchor.constraint(equalTo: cellView.rightAnchor, constant: lineWidth),
+                ])
             }
         }
         
         reset()
         
-        for y in yRange {
-            for x in xRange {
-                let cellView: CellView = cellViewAt(x: x, y: y)!
-                let action = CellSelectionAction(boardView: self, x: x, y: y)
-                actions.append(action) // To retain the `action`
-                cellView.addTarget(action, action: #selector(action.selectCell), for: .touchUpInside)
-            }
+        allCells.forEach { (x, y) in
+            
+            let cellView: CellView = cellViewAt(x: x, y: y)!
+            let action = CellSelectionAction(boardView: self, x: x, y: y)
+            actions.append(action) // To retain the `action`
+            cellView.addTarget(action, action: #selector(action.selectCell), for: .touchUpInside)
         }
     }
     
     /// 盤をゲーム開始時に状態に戻します。このメソッドはアニメーションを伴いません。
     public func reset() {
-        for y in  yRange {
-            for x in xRange {
-                setDisk(nil, atX: x, y: y, animated: false)
-            }
+        allCells.forEach { (x, y) in
+            
+            setDisk(nil, atX: x, y: y, animated: false)
         }
         
         setDisk(.light, atX: width / 2 - 1, y: height / 2 - 1, animated: false)
