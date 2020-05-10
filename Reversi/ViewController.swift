@@ -126,7 +126,7 @@ extension ViewController {
 }
 
 
-extension ViewController: BoardDelegate {
+extension ViewController: ReversiEngineDelegate {
     
     func beginComputerThinking(_ reversi: ReversiEngine, turn: Disk) {
         

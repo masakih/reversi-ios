@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-protocol BoardDelegate: AnyObject {
+protocol ReversiEngineDelegate: AnyObject {
     
     func beginComputerThinking(_ reversi: ReversiEngine, turn: Disk)
     func endComputerThinking(_ reversi: ReversiEngine, turn: Disk)
@@ -22,9 +22,9 @@ protocol BoardDelegate: AnyObject {
 
 final class ReversiEngine {
     
-    let boardView: BoardView
+    let boardView: Board
     
-    weak var delegate: BoardDelegate?
+    weak var delegate: ReversiEngineDelegate?
     
     @Published private(set) var counts: (Int, Int) = (0, 0)
     
