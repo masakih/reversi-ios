@@ -19,6 +19,7 @@
 		D642BDD823AA0B5700396732 /* Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDD723AA0B5700396732 /* Disk.swift */; };
 		D642BDDC23AA137C00396732 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDDB23AA137C00396732 /* BoardView.swift */; };
 		F493C96524628ABA003EB812 /* ReversiEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C96424628AB9003EB812 /* ReversiEngine.swift */; };
+		F493C9672467F3F6003EB812 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9662467F3F6003EB812 /* Board.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		D642BDD723AA0B5700396732 /* Disk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disk.swift; sourceTree = "<group>"; };
 		D642BDDB23AA137C00396732 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		F493C96424628AB9003EB812 /* ReversiEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversiEngine.swift; sourceTree = "<group>"; };
+		F493C9662467F3F6003EB812 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				D642BDB323A9FE4500396732 /* AppDelegate.swift */,
 				D642BDB523A9FE4500396732 /* SceneDelegate.swift */,
 				D642BDB723A9FE4500396732 /* ViewController.swift */,
+				F493C9662467F3F6003EB812 /* Board.swift */,
 				F493C96424628AB9003EB812 /* ReversiEngine.swift */,
 				D642BDB923A9FE4500396732 /* Main.storyboard */,
 				D642BDBC23A9FE4700396732 /* Assets.xcassets */,
@@ -239,6 +242,7 @@
 				D642BDB423A9FE4500396732 /* AppDelegate.swift in Sources */,
 				F493C96524628ABA003EB812 /* ReversiEngine.swift in Sources */,
 				D642BDB623A9FE4500396732 /* SceneDelegate.swift in Sources */,
+				F493C9672467F3F6003EB812 /* Board.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

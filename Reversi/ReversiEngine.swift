@@ -14,7 +14,6 @@ protocol ReversiEngineDelegate: AnyObject {
     func beginComputerThinking(_ reversi: ReversiEngine, turn: Disk)
     func endComputerThinking(_ reversi: ReversiEngine, turn: Disk)
     
-    
     /// パスが発生した時に呼び出される
     /// - Parameter completion: 処理が終わった時に呼び出す必要がある
     func willPass(_ reversi: ReversiEngine, turn: Disk, completion: @escaping () -> Void)
@@ -22,7 +21,7 @@ protocol ReversiEngineDelegate: AnyObject {
 
 final class ReversiEngine {
     
-    let boardView: Board
+    let board: Board
     
     weak var delegate: ReversiEngineDelegate?
     
@@ -55,10 +54,10 @@ final class ReversiEngine {
     
     private var playerCancellers: [Disk: Canceller] = [:]
     
-    init(_ boardView: BoardView) {
+    init(_ board: Board) {
         
-        self.boardView = boardView
-        boardView.delegate = self
+        self.board = board
+        board.delegate = self
     }
     
     var currentPlayer: Player? {
@@ -85,9 +84,9 @@ extension ReversiEngine {
     /// - Returns: `side` で指定された色のディスクの、盤上の枚数です。
     func countDisks(of side: Disk) -> Int {
 
-        boardView.allCells
+        board.allCells
             .reduce(0) { t, vector in
-                boardView.diskAt(x: vector.0, y: vector.1) == side ? t + 1 : t
+                board.diskAt(x: vector.0, y: vector.1) == side ? t + 1 : t
         }
     }
     
@@ -116,7 +115,7 @@ extension ReversiEngine {
             (x: -1, y:  1),
         ]
         
-        guard boardView.diskAt(x: x, y: y) == nil else {
+        guard board.diskAt(x: x, y: y) == nil else {
             return []
         }
         
@@ -131,7 +130,7 @@ extension ReversiEngine {
                 x += direction.x
                 y += direction.y
                 
-                switch (disk, boardView.diskAt(x: x, y: y)) { // Uses tuples to make patterns exhaustive
+                switch (disk, board.diskAt(x: x, y: y)) { // Uses tuples to make patterns exhaustive
                 case (.dark, .some(.dark)), (.light, .some(.light)):
                     diskCoordinates.append(contentsOf: diskCoordinatesInLine)
                     break flipping
@@ -159,7 +158,7 @@ extension ReversiEngine {
     /// - Returns: `side` で指定された色のディスクを置ける盤上のすべてのセルの座標の配列です。
     func validMoves(for side: Disk) -> [(x: Int, y: Int)] {
         
-        boardView.allCells
+        board.allCells
             .reduce([]) { coordinates, vector in
                 
                 canPlaceDisk(side, atX: vector.0, y: vector.1) ? coordinates + [vector] : coordinates
@@ -198,9 +197,9 @@ extension ReversiEngine {
         } else {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.boardView.setDisk(disk, atX: x, y: y, animated: false)
+                self.board.setDisk(disk, atX: x, y: y, animated: false)
                 for (x, y) in diskCoordinates {
-                    self.boardView.setDisk(disk, atX: x, y: y, animated: false)
+                    self.board.setDisk(disk, atX: x, y: y, animated: false)
                 }
                 completion?(true)
                 try? self.saveGame()
@@ -222,14 +221,14 @@ extension ReversiEngine {
         }
         
         let animationCanceller = self.animationCanceller!
-        boardView.setDisk(disk, atX: x, y: y, animated: true) { [weak self] isFinished in
+        board.setDisk(disk, atX: x, y: y, animated: true) { [weak self] isFinished in
             guard let self = self else { return }
             if animationCanceller.isCancelled { return }
             if isFinished {
                 self.animateSettingDisks(at: coordinates.dropFirst(), to: disk, completion: completion)
             } else {
                 for (x, y) in coordinates {
-                    self.boardView.setDisk(disk, atX: x, y: y, animated: false)
+                    self.board.setDisk(disk, atX: x, y: y, animated: false)
                 }
                 completion(false)
             }
@@ -261,7 +260,7 @@ extension ReversiEngine {
     }
     /// ゲームの状態を初期化し、新しいゲームを開始します。
     func newGame() {
-        boardView.reset()
+        board.reset()
         turn = .dark
         blackPlayer = .manual
         whitePlayer = .manual
@@ -341,12 +340,12 @@ extension ReversiEngine {
 
 
 
-extension ReversiEngine: BoardViewDelegate {
-    /// `boardView` の `x`, `y` で指定されるセルがタップされたときに呼ばれます。
-    /// - Parameter boardView: セルをタップされた `BoardView` インスタンスです。
+extension ReversiEngine: BoardDelegate {
+    /// `board` の `x`, `y` で指定されるセルがタップされたときに呼ばれます。
+    /// - Parameter board: セルをタップされた `Board` インスタンスです。
     /// - Parameter x: セルの列です。
     /// - Parameter y: セルの行です。
-    func boardView(_ boardView: BoardView, didSelectCellAtX x: Int, y: Int) {
+    func boardView(_ board: Board, didSelectCellAtX x: Int, y: Int) {
         guard let turn = turn else { return }
         if isAnimating { return }
         guard case .manual = currentPlayer else { return }
@@ -373,12 +372,12 @@ extension ReversiEngine {
         output += whitePlayer.rawValue.description
         output += "\n"
         
-        boardView.allLines
+        board.allLines
             .forEach { line in
                 
                 line.forEach { cell in
                     
-                    output += boardView.diskAt(x: cell.0, y: cell.1).symbol
+                    output += board.diskAt(x: cell.0, y: cell.1).symbol
                 }
                 output += "\n"
         }
@@ -422,7 +421,7 @@ extension ReversiEngine {
         whitePlayer = Player(rawValue: whitePlayerNumber) ?? .manual
 
         do { // board
-            guard lines.count == boardView.height else {
+            guard lines.count == board.height else {
                 throw FileIOError.read(path: path, cause: nil)
             }
             
@@ -431,15 +430,15 @@ extension ReversiEngine {
                 var x = 0
                 for character in line {
                     let disk = Disk?(symbol: "\(character)").flatMap { $0 }
-                    boardView.setDisk(disk, atX: x, y: y, animated: false)
+                    board.setDisk(disk, atX: x, y: y, animated: false)
                     x += 1
                 }
-                guard x == boardView.width else {
+                guard x == board.width else {
                     throw FileIOError.read(path: path, cause: nil)
                 }
                 y += 1
             }
-            guard y == boardView.height else {
+            guard y == board.height else {
                 throw FileIOError.read(path: path, cause: nil)
             }
         }

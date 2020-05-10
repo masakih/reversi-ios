@@ -2,7 +2,8 @@ import UIKit
 
 private let lineWidth: CGFloat = 2
 
-public class BoardView: UIView {
+public class BoardView: UIView, Board {
+    
     private var cellViews: [CellView] = []
     private var actions: [CellSelectionAction] = []
     
@@ -19,7 +20,7 @@ public class BoardView: UIView {
     public let yRange: Range<Int>
     
     /// セルがタップされたときの挙動を移譲するためのオブジェクトです。
-    public weak var delegate: BoardViewDelegate?
+    public weak var delegate: BoardDelegate?
     
     override public init(frame: CGRect) {
         xRange = 0 ..< width
@@ -35,12 +36,12 @@ public class BoardView: UIView {
         setUp()
     }
     
-    public var allCells: [(Int, Int)] {
+    public var allCells: [Board.Cell] {
         
         yRange.flatMap { y in xRange.map { x in (x, y) } }
     }
     
-    public var allLines: [[(Int, Int)]] {
+    public var allLines: [Board.Line] {
         
         yRange.map { y in xRange.map { x in (x, y) } }
     }
@@ -149,20 +150,16 @@ public class BoardView: UIView {
     /// - Parameter completion: アニメーションの完了通知を受け取るハンドラーです。
     ///     `animated` に `false` が指定された場合は状態が変更された後で即座に同期的に呼び出されます。
     ///     ハンドラーが受け取る `Bool` 値は、 `UIView.animate()`  等に準じます。
-    public func setDisk(_ disk: Disk?, atX x: Int, y: Int, animated: Bool, completion: ((Bool) -> Void)? = nil) {
+    public func setDisk(_ disk: Disk?, atX x: Int, y: Int, animated: Bool, completion: ((Bool) -> Void)?) {
         guard let cellView = cellViewAt(x: x, y: y) else {
             preconditionFailure() // FIXME: Add a message.
         }
         cellView.setDisk(disk, animated: animated, completion: completion)
     }
-}
-
-public protocol BoardViewDelegate: AnyObject {
-    /// `boardView` の `x`, `y` で指定されるセルがタップされたときに呼ばれます。
-    /// - Parameter boardView: セルをタップされた `BoardView` インスタンスです。
-    /// - Parameter x: セルの列です。
-    /// - Parameter y: セルの行です。
-    func boardView(_ boardView: BoardView, didSelectCellAtX x: Int, y: Int)
+    public func setDisk(_ disk: Disk?, atX x: Int, y: Int, animated: Bool) {
+        
+        setDisk(disk, atX: x, y: y, animated: animated, completion: nil)
+    }
 }
 
 private class CellSelectionAction: NSObject {
