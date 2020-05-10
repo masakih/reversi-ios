@@ -248,6 +248,16 @@ extension ReversiEngine {
 // MARK: Game management
 
 extension ReversiEngine {
+    
+    /// ゲームを始める
+    func start() {
+        
+        do {
+            try loadGame()
+        } catch _ {
+            newGame()
+        }
+    }
     /// ゲームの状態を初期化し、新しいゲームを開始します。
     func newGame() {
         boardView.reset()

@@ -78,11 +78,7 @@ class ViewController: UIViewController {
         
         reversiEngine.delegate = self
         
-        do {
-            try reversiEngine.loadGame()
-        } catch _ {
-            reversiEngine.newGame()
-        }
+        reversiEngine.start()
     }
     
     private var viewHasAppeared: Bool = false
@@ -143,7 +139,7 @@ extension ViewController: BoardDelegate {
     
     func endComputerThinking(_ reversi: ReversiEngine, turn: Disk) {
         
-        self.playerActivityIndicators[turn.index].stopAnimating()
+        playerActivityIndicators[turn.index].stopAnimating()
     }
     
     func willPass(_ reversi: ReversiEngine, turn: Disk) {
