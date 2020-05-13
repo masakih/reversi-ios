@@ -20,6 +20,19 @@
 		D642BDDC23AA137C00396732 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDDB23AA137C00396732 /* BoardView.swift */; };
 		F493C96524628ABA003EB812 /* ReversiEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C96424628AB9003EB812 /* ReversiEngine.swift */; };
 		F493C9672467F3F6003EB812 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9662467F3F6003EB812 /* Board.swift */; };
+		F493C96F24680523003EB812 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C96E24680523003EB812 /* AppDelegate.swift */; };
+		F493C97124680523003EB812 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C97024680523003EB812 /* ViewController.swift */; };
+		F493C97324680525003EB812 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F493C97224680525003EB812 /* Assets.xcassets */; };
+		F493C97624680525003EB812 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F493C97424680525003EB812 /* Main.storyboard */; };
+		F493C98224680525003EB812 /* ReversiForMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C98124680525003EB812 /* ReversiForMacTests.swift */; };
+		F493C98A24680552003EB812 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9662467F3F6003EB812 /* Board.swift */; };
+		F493C98B24680557003EB812 /* ReversiEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C96424628AB9003EB812 /* ReversiEngine.swift */; };
+		F493C98C2468055F003EB812 /* Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDD723AA0B5700396732 /* Disk.swift */; };
+		F493C98F24680A94003EB812 /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C98E24680A94003EB812 /* DiskView.swift */; };
+		F493C99124681466003EB812 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C99024681466003EB812 /* CellView.swift */; };
+		F493C99524685457003EB812 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C99424685457003EB812 /* BoardView.swift */; };
+		F493C99624685653003EB812 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D642BDBC23A9FE4700396732 /* Assets.xcassets */; };
+		F493C99824699B84003EB812 /* ViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C99724699B84003EB812 /* ViewAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +42,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D642BDAF23A9FE4500396732;
 			remoteInfo = Reversi;
+		};
+		F493C97E24680525003EB812 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D642BDA823A9FE4500396732 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F493C96B24680523003EB812;
+			remoteInfo = ReversiForMac;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -50,6 +70,20 @@
 		D642BDDB23AA137C00396732 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		F493C96424628AB9003EB812 /* ReversiEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversiEngine.swift; sourceTree = "<group>"; };
 		F493C9662467F3F6003EB812 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		F493C96C24680523003EB812 /* ReversiForMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReversiForMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F493C96E24680523003EB812 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F493C97024680523003EB812 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F493C97224680525003EB812 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F493C97524680525003EB812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F493C97724680525003EB812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F493C97824680525003EB812 /* ReversiForMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReversiForMac.entitlements; sourceTree = "<group>"; };
+		F493C97D24680525003EB812 /* ReversiForMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReversiForMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F493C98124680525003EB812 /* ReversiForMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversiForMacTests.swift; sourceTree = "<group>"; };
+		F493C98324680525003EB812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F493C98E24680A94003EB812 /* DiskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskView.swift; sourceTree = "<group>"; };
+		F493C99024681466003EB812 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		F493C99424685457003EB812 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		F493C99724699B84003EB812 /* ViewAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +95,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D642BDC323A9FE4700396732 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F493C96924680523003EB812 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F493C97A24680525003EB812 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -93,6 +141,8 @@
 			children = (
 				D642BDB223A9FE4500396732 /* Reversi */,
 				D642BDC923A9FE4700396732 /* ReversiTests */,
+				F493C96D24680523003EB812 /* ReversiForMac */,
+				F493C98024680525003EB812 /* ReversiForMacTests */,
 				D642BDB123A9FE4500396732 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,6 +152,8 @@
 			children = (
 				D642BDB023A9FE4500396732 /* Reversi.app */,
 				D642BDC623A9FE4700396732 /* ReversiTests.xctest */,
+				F493C96C24680523003EB812 /* ReversiForMac.app */,
+				F493C97D24680525003EB812 /* ReversiForMacTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,6 +183,40 @@
 				D642BDCC23A9FE4700396732 /* Info.plist */,
 			);
 			path = ReversiTests;
+			sourceTree = "<group>";
+		};
+		F493C96D24680523003EB812 /* ReversiForMac */ = {
+			isa = PBXGroup;
+			children = (
+				F493C96E24680523003EB812 /* AppDelegate.swift */,
+				F493C97024680523003EB812 /* ViewController.swift */,
+				F493C99724699B84003EB812 /* ViewAnimation.swift */,
+				F493C97224680525003EB812 /* Assets.xcassets */,
+				F493C97424680525003EB812 /* Main.storyboard */,
+				F493C97724680525003EB812 /* Info.plist */,
+				F493C97824680525003EB812 /* ReversiForMac.entitlements */,
+				F493C98D246805E5003EB812 /* Views */,
+			);
+			path = ReversiForMac;
+			sourceTree = "<group>";
+		};
+		F493C98024680525003EB812 /* ReversiForMacTests */ = {
+			isa = PBXGroup;
+			children = (
+				F493C98124680525003EB812 /* ReversiForMacTests.swift */,
+				F493C98324680525003EB812 /* Info.plist */,
+			);
+			path = ReversiForMacTests;
+			sourceTree = "<group>";
+		};
+		F493C98D246805E5003EB812 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F493C99424685457003EB812 /* BoardView.swift */,
+				F493C99024681466003EB812 /* CellView.swift */,
+				F493C98E24680A94003EB812 /* DiskView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,13 +257,48 @@
 			productReference = D642BDC623A9FE4700396732 /* ReversiTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F493C96B24680523003EB812 /* ReversiForMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F493C98424680525003EB812 /* Build configuration list for PBXNativeTarget "ReversiForMac" */;
+			buildPhases = (
+				F493C96824680523003EB812 /* Sources */,
+				F493C96924680523003EB812 /* Frameworks */,
+				F493C96A24680523003EB812 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReversiForMac;
+			productName = ReversiForMac;
+			productReference = F493C96C24680523003EB812 /* ReversiForMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F493C97C24680525003EB812 /* ReversiForMacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F493C98724680525003EB812 /* Build configuration list for PBXNativeTarget "ReversiForMacTests" */;
+			buildPhases = (
+				F493C97924680525003EB812 /* Sources */,
+				F493C97A24680525003EB812 /* Frameworks */,
+				F493C97B24680525003EB812 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F493C97F24680525003EB812 /* PBXTargetDependency */,
+			);
+			name = ReversiForMacTests;
+			productName = ReversiForMacTests;
+			productReference = F493C97D24680525003EB812 /* ReversiForMacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		D642BDA823A9FE4500396732 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Yuta Koshizawa";
 				TargetAttributes = {
@@ -187,6 +308,13 @@
 					D642BDC523A9FE4700396732 = {
 						CreatedOnToolsVersion = 11.3;
 						TestTargetID = D642BDAF23A9FE4500396732;
+					};
+					F493C96B24680523003EB812 = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+					F493C97C24680525003EB812 = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = F493C96B24680523003EB812;
 					};
 				};
 			};
@@ -205,6 +333,8 @@
 			targets = (
 				D642BDAF23A9FE4500396732 /* Reversi */,
 				D642BDC523A9FE4700396732 /* ReversiTests */,
+				F493C96B24680523003EB812 /* ReversiForMac */,
+				F493C97C24680525003EB812 /* ReversiForMacTests */,
 			);
 		};
 /* End PBXProject section */
@@ -221,6 +351,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D642BDC423A9FE4700396732 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F493C96A24680523003EB812 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F493C97324680525003EB812 /* Assets.xcassets in Resources */,
+				F493C99624685653003EB812 /* Assets.xcassets in Resources */,
+				F493C97624680525003EB812 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F493C97B24680525003EB812 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -254,6 +401,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F493C96824680523003EB812 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F493C98B24680557003EB812 /* ReversiEngine.swift in Sources */,
+				F493C98F24680A94003EB812 /* DiskView.swift in Sources */,
+				F493C98C2468055F003EB812 /* Disk.swift in Sources */,
+				F493C97124680523003EB812 /* ViewController.swift in Sources */,
+				F493C96F24680523003EB812 /* AppDelegate.swift in Sources */,
+				F493C99524685457003EB812 /* BoardView.swift in Sources */,
+				F493C99824699B84003EB812 /* ViewAnimation.swift in Sources */,
+				F493C98A24680552003EB812 /* Board.swift in Sources */,
+				F493C99124681466003EB812 /* CellView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F493C97924680525003EB812 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F493C98224680525003EB812 /* ReversiForMacTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -261,6 +432,11 @@
 			isa = PBXTargetDependency;
 			target = D642BDAF23A9FE4500396732 /* Reversi */;
 			targetProxy = D642BDC723A9FE4700396732 /* PBXContainerItemProxy */;
+		};
+		F493C97F24680525003EB812 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F493C96B24680523003EB812 /* ReversiForMac */;
+			targetProxy = F493C97E24680525003EB812 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -279,6 +455,14 @@
 				D642BDBF23A9FE4700396732 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F493C97424680525003EB812 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F493C97524680525003EB812 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -470,6 +654,90 @@
 			};
 			name = Release;
 		};
+		F493C98524680525003EB812 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ReversiForMac/ReversiForMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReversiForMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.masakih.ReversiForMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F493C98624680525003EB812 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ReversiForMac/ReversiForMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReversiForMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.masakih.ReversiForMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F493C98824680525003EB812 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReversiForMacTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.masakih.ReversiForMacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReversiForMac.app/Contents/MacOS/ReversiForMac";
+			};
+			name = Debug;
+		};
+		F493C98924680525003EB812 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReversiForMacTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.masakih.ReversiForMacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReversiForMac.app/Contents/MacOS/ReversiForMac";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -496,6 +764,24 @@
 			buildConfigurations = (
 				D642BDD323A9FE4800396732 /* Debug */,
 				D642BDD423A9FE4800396732 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F493C98424680525003EB812 /* Build configuration list for PBXNativeTarget "ReversiForMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F493C98524680525003EB812 /* Debug */,
+				F493C98624680525003EB812 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F493C98724680525003EB812 /* Build configuration list for PBXNativeTarget "ReversiForMacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F493C98824680525003EB812 /* Debug */,
+				F493C98924680525003EB812 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
