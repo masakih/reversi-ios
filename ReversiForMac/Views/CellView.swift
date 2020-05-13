@@ -75,11 +75,11 @@ public class CellView: NSControl {
         } else {
             diskSize = CGSize(width: 1, height: diskDiameter)
         }
-        diskView.animator().frame = CGRect(
+        diskView.frame = CGRect(
             origin: CGPoint(x: (cellSize.width - diskSize.width) / 2, y: (cellSize.height - diskSize.height) / 2),
             size: diskSize
         )
-        diskView.animator().alphaValue = _disk == nil ? 0.0 : 1.0
+        diskView.alphaValue = _disk == nil ? 0.0 : 1.0
     }
     
     private func show() {
