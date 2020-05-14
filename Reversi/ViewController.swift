@@ -51,7 +51,7 @@ class ViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .map { whitePlayer in whitePlayer.rawValue }
             .sink { whitePlayer in
-                self.playerControls[0].selectedSegmentIndex = whitePlayer
+                self.playerControls[1].selectedSegmentIndex = whitePlayer
         }
         .store(in: &calcel)
         
