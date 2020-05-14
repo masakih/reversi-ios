@@ -85,9 +85,8 @@ extension ReversiEngine {
     func countDisks(of side: Disk) -> Int {
 
         board.allCells
-            .reduce(0) { t, vector in
-                board.diskAt(x: vector.0, y: vector.1) == side ? t + 1 : t
-        }
+            .filter { vector in board.diskAt(x: vector.0, y: vector.1) == side  }
+            .count
     }
     
     /// 盤上に置かれたディスクの枚数が多い方の色を返します。
