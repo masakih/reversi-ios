@@ -159,10 +159,7 @@ extension ReversiEngine {
     func validMoves(for side: Disk) -> [(x: Int, y: Int)] {
         
         board.allCells
-            .reduce([]) { coordinates, vector in
-                
-                canPlaceDisk(side, atX: vector.0, y: vector.1) ? coordinates + [vector] : coordinates
-        }
+            .filter { vector in canPlaceDisk(side, atX: vector.0, y: vector.1) }
     }
     
     /// `x`, `y` で指定されたセルに `disk` を置きます。
