@@ -93,12 +93,13 @@ extension ReversiEngine {
     /// 引き分けの場合は `nil` が返されます。
     /// - Returns: 盤上に置かれたディスクの枚数が多い方の色です。引き分けの場合は `nil` を返します。
     func sideWithMoreDisks() -> Disk? {
-        let darkCount = countDisks(of: .dark)
-        let lightCount = countDisks(of: .light)
-        if darkCount == lightCount {
-            return nil
-        } else {
-            return darkCount > lightCount ? .dark : .light
+        
+        switch counts {
+        case let (d, l) where d == l: return nil
+        case let (d, l) where d > l: return .dark
+        case let (d, l) where d < l: return .light
+            
+        default: fatalError("Never reach")
         }
     }
     
