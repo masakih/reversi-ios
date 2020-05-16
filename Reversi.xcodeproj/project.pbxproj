@@ -53,6 +53,7 @@
 		F493C9B824701214003EB812 /* ViewController-extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B6247010D5003EB812 /* ViewController-extensions.swift */; };
 		F493C9BA2470131B003EB812 /* ReversiViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B92470131B003EB812 /* ReversiViewControllerProtocol.swift */; };
 		F493C9BB247013CF003EB812 /* ReversiViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B92470131B003EB812 /* ReversiViewControllerProtocol.swift */; };
+		F493C9BD2470371E003EB812 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9BC2470371E003EB812 /* WindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		F493C9B1247009C4003EB812 /* PlatformSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformSwitcher.swift; sourceTree = "<group>"; };
 		F493C9B6247010D5003EB812 /* ViewController-extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController-extensions.swift"; sourceTree = "<group>"; };
 		F493C9B92470131B003EB812 /* ReversiViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversiViewControllerProtocol.swift; sourceTree = "<group>"; };
+		F493C9BC2470371E003EB812 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				F493C96E24680523003EB812 /* AppDelegate.swift */,
+				F493C9BC2470371E003EB812 /* WindowController.swift */,
 				F493C97024680523003EB812 /* ViewController.swift */,
 				F493C99724699B84003EB812 /* ViewAnimation.swift */,
 				F493C97224680525003EB812 /* Assets.xcassets */,
@@ -442,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F493C98B24680557003EB812 /* ReversiEngine.swift in Sources */,
+				F493C9BD2470371E003EB812 /* WindowController.swift in Sources */,
 				F493C99E246F8909003EB812 /* GraphicsContext.swift in Sources */,
 				F493C9A3246F8EE2003EB812 /* BoardView.swift in Sources */,
 				F493C98C2468055F003EB812 /* Disk.swift in Sources */,
