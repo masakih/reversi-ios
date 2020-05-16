@@ -1,9 +1,14 @@
+
+#if os(iOS)
 import UIKit
+#elseif os(macOS)
+import Cocoa
+#endif
 
 private let animationDuration: TimeInterval = 0.25
 
-public class CellView: UIControl {
-    private let button: UIButton = UIButton()
+public class CellView: PlatformControl {
+    private let button = PlatformButton(frame: .zero)
     private let diskView: DiskView = DiskView()
     
     private var _disk: Disk?
@@ -24,35 +29,21 @@ public class CellView: UIControl {
     
     private func setUp() {
         do { // button
-            button.translatesAutoresizingMaskIntoConstraints = false
+            button.enableViewAnimation = true
             do { // backgroundImage
-                UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
-                defer { UIGraphicsEndImageContext() }
-                
-                let color: UIColor = UIColor(named: "CellColor")!
-                color.set()
-                UIRectFill(CGRect(x: 0, y: 0, width: 1, height: 1))
-                
-                let backgroundImage = UIGraphicsGetImageFromCurrentImageContext()!
-                button.setBackgroundImage(backgroundImage, for: .normal)
-                button.setBackgroundImage(backgroundImage, for: .disabled)
+                button.setBackgroundImage(
+                    Color(named: "CellColor")?.makeImage(CGSize(width: 1, height: 1))
+                )
             }
             self.addSubview(button)
         }
 
         do { // diskView
-            diskView.translatesAutoresizingMaskIntoConstraints = false
+            diskView.enableViewAnimation = true
             self.addSubview(diskView)
         }
 
         setNeedsLayout()
-    }
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        button.frame = bounds
-        layoutDiskView()
     }
     
     private func layoutDiskView() {
@@ -81,32 +72,13 @@ public class CellView: UIControl {
                 completion?(true)
             case (.none, .some(let animationDisk)):
                 diskView.disk = animationDisk
-                fallthrough
+                show { finished in completion?(finished) }
             case (.some, .none):
-                UIView.animate(withDuration: animationDuration, delay: 0, options: .curveEaseIn, animations: { [weak self] in
-                    self?.layoutDiskView()
-                }, completion: { finished in
-                    completion?(finished)
-                })
+                show { finished in completion?(finished) }
             case (.some, .some):
-                UIView.animate(withDuration: animationDuration / 2, delay: 0, options: .curveEaseOut, animations: { [weak self] in
-                    self?.layoutDiskView()
-                }, completion: { [weak self] finished in
-                    guard let self = self else { return }
-                    if self.diskView.disk == self._disk {
-                        completion?(finished)
-                    }
-                    guard let diskAfter = self._disk else {
-                        completion?(finished)
-                        return
-                    }
-                    self.diskView.disk = diskAfter
-                    UIView.animate(withDuration: animationDuration / 2, animations: { [weak self] in
-                        self?.layoutDiskView()
-                    }, completion: { finished in
-                        completion?(finished)
-                    })
-                })
+                turn(to: disk!) { finished in
+                    completion?(finished)
+                }
             }
         } else {
             if let diskAfter = diskAfter {
@@ -116,6 +88,134 @@ public class CellView: UIControl {
             setNeedsLayout()
         }
     }
+}
+
+
+// MARK: Animation
+#if os(iOS)
+
+extension CellView {
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        button.frame = bounds
+        layoutDiskView()
+    }
+    
+    private func show(completionHandler: @escaping (Bool) -> Void) {
+        
+        UIView.animate(withDuration: animationDuration, delay: 0, options: .curveEaseIn, animations: { [weak self] in
+            self?.layoutDiskView()
+        }, completion: { finished in
+            completionHandler(finished)
+        })
+    }
+    
+    private func turn(to disk: Disk, completionHandler: @escaping (Bool) -> Void) {
+        
+        UIView.animate(withDuration: animationDuration / 2, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+            self?.layoutDiskView()
+        }, completion: { [weak self] finished in
+            guard let self = self else { return }
+            if self.diskView.disk == self._disk {
+                completionHandler(finished)
+            }
+            guard let diskAfter = self._disk else {
+                completionHandler(finished)
+                return
+            }
+            self.diskView.disk = diskAfter
+            UIView.animate(withDuration: animationDuration / 2, animations: { [weak self] in
+                self?.layoutDiskView()
+            }, completion: { finished in
+                completionHandler(finished)
+            })
+        })
+    }
+}
+
+#endif
+
+#if os(macOS)
+
+extension CellView {
+    
+    public override func layout() {
+        super.layout()
+        
+        button.frame = bounds
+        layoutDiskView()
+    }
+    
+    private func show(completionHandler: @escaping (Bool) -> Void) {
+        
+        let cellSize = bounds.size
+        let diskDiameter = Swift.min(cellSize.width, cellSize.height) * 0.8
+        let diskSize: CGSize
+            diskSize = CGSize(width: diskDiameter, height: diskDiameter)
+        diskView.animator().frame = CGRect(
+            origin: CGPoint(x: (cellSize.width - diskSize.width) / 2, y: (cellSize.height - diskSize.height) / 2),
+            size: diskSize
+        )
+        diskView.animator().alphaValue = 1.0
+        
+        completionHandler(true)
+    }
+    
+    private func turn(to disk: Disk, completionHandler: @escaping (Bool) -> Void) {
+        
+        precondition(_disk != nil)
+        
+        let cellSize = bounds.size
+        let diskDiameter = Swift.min(cellSize.width, cellSize.height) * 0.8
+        let diskSize = CGSize(width: 1, height: diskDiameter)
+        let endFrame = CGRect(
+            origin: CGPoint(x: (cellSize.width - diskSize.width) / 2, y: (cellSize.height - diskSize.height) / 2),
+            size: diskSize
+        )
+        
+        let attr = ViewAnimationAttributes(target: diskView,
+                                           startFrame: nil,
+                                           endFrame: endFrame,
+                                           effect: nil)
+        
+        let anime = ViewAnimation(viewAnimations: [attr])
+        anime.duration = animationDuration
+        anime.start {
+            
+            self._disk = disk
+            self.diskView.disk = disk
+            
+            let diskSize = CGSize(width: diskDiameter, height: diskDiameter)
+            let endFrame = CGRect(
+                origin: CGPoint(x: (cellSize.width - diskSize.width) / 2, y: (cellSize.height - diskSize.height) / 2),
+                size: diskSize
+            )
+            
+            let attr = ViewAnimationAttributes(target: self.diskView,
+                                               startFrame: nil,
+                                               endFrame: endFrame,
+                                               effect: nil)
+            
+            let anime = ViewAnimation(viewAnimations: [attr])
+            anime.duration = animationDuration
+            anime.start {
+                
+                self.diskView.alphaValue = 1.0
+                
+                completionHandler(true)
+            }
+        }
+    }
+}
+#endif
+
+
+// MARK: Control Override
+#if os(iOS)
+
+extension CellView {
     
     public override func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
         button.addTarget(target, action: action, for: controlEvents)
@@ -137,3 +237,22 @@ public class CellView: UIControl {
         button.allControlEvents
     }
 }
+
+#endif
+
+#if os(macOS)
+
+extension CellView {
+    
+    public override var target: AnyObject? {
+        get { button.target }
+        set { button.target = newValue }
+    }
+    
+    public override var action: Selector? {
+        get { button.action }
+        set { button.action = newValue }
+    }
+}
+
+#endif

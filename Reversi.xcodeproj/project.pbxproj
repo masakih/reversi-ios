@@ -28,7 +28,6 @@
 		F493C98A24680552003EB812 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9662467F3F6003EB812 /* Board.swift */; };
 		F493C98B24680557003EB812 /* ReversiEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C96424628AB9003EB812 /* ReversiEngine.swift */; };
 		F493C98C2468055F003EB812 /* Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDD723AA0B5700396732 /* Disk.swift */; };
-		F493C99124681466003EB812 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C99024681466003EB812 /* CellView.swift */; };
 		F493C99624685653003EB812 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D642BDBC23A9FE4700396732 /* Assets.xcassets */; };
 		F493C99824699B84003EB812 /* ViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C99724699B84003EB812 /* ViewAnimation.swift */; };
 		F493C99A246F855D003EB812 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C999246F855D003EB812 /* Color.swift */; };
@@ -39,6 +38,13 @@
 		F493C9A1246F8B7F003EB812 /* PlatformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C99F246F8AF4003EB812 /* PlatformView.swift */; };
 		F493C9A2246F8C60003EB812 /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636B39E23D35043007F370F /* DiskView.swift */; };
 		F493C9A3246F8EE2003EB812 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDDB23AA137C00396732 /* BoardView.swift */; };
+		F493C9A5246F9F07003EB812 /* PlatformControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9A4246F9F07003EB812 /* PlatformControl.swift */; };
+		F493C9A6246F9F59003EB812 /* PlatformControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9A4246F9F07003EB812 /* PlatformControl.swift */; };
+		F493C9A8246F9FE0003EB812 /* PlatformButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9A7246F9FE0003EB812 /* PlatformButton.swift */; };
+		F493C9A9246FA042003EB812 /* PlatformButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9A7246F9FE0003EB812 /* PlatformButton.swift */; };
+		F493C9AB246FA2D0003EB812 /* PlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9AA246FA2D0003EB812 /* PlatformImage.swift */; };
+		F493C9AC246FA4E1003EB812 /* PlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9AA246FA2D0003EB812 /* PlatformImage.swift */; };
+		F493C9AD246FB9C9003EB812 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDD523AA0B3900396732 /* CellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,11 +92,13 @@
 		F493C97D24680525003EB812 /* ReversiForMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReversiForMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F493C98124680525003EB812 /* ReversiForMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversiForMacTests.swift; sourceTree = "<group>"; };
 		F493C98324680525003EB812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F493C99024681466003EB812 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		F493C99724699B84003EB812 /* ViewAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimation.swift; sourceTree = "<group>"; };
 		F493C999246F855D003EB812 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		F493C99C246F8819003EB812 /* GraphicsContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsContext.swift; sourceTree = "<group>"; };
 		F493C99F246F8AF4003EB812 /* PlatformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformView.swift; sourceTree = "<group>"; };
+		F493C9A4246F9F07003EB812 /* PlatformControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformControl.swift; sourceTree = "<group>"; };
+		F493C9A7246F9FE0003EB812 /* PlatformButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformButton.swift; sourceTree = "<group>"; };
+		F493C9AA246FA2D0003EB812 /* PlatformImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +150,9 @@
 				F493C999246F855D003EB812 /* Color.swift */,
 				F493C99C246F8819003EB812 /* GraphicsContext.swift */,
 				F493C99F246F8AF4003EB812 /* PlatformView.swift */,
+				F493C9A4246F9F07003EB812 /* PlatformControl.swift */,
+				F493C9A7246F9FE0003EB812 /* PlatformButton.swift */,
+				F493C9AA246FA2D0003EB812 /* PlatformImage.swift */,
 			);
 			name = DataTypes;
 			sourceTree = "<group>";
@@ -205,7 +216,6 @@
 				F493C97424680525003EB812 /* Main.storyboard */,
 				F493C97724680525003EB812 /* Info.plist */,
 				F493C97824680525003EB812 /* ReversiForMac.entitlements */,
-				F493C98D246805E5003EB812 /* Views */,
 			);
 			path = ReversiForMac;
 			sourceTree = "<group>";
@@ -217,14 +227,6 @@
 				F493C98324680525003EB812 /* Info.plist */,
 			);
 			path = ReversiForMacTests;
-			sourceTree = "<group>";
-		};
-		F493C98D246805E5003EB812 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				F493C99024681466003EB812 /* CellView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,8 +399,11 @@
 				D642BDB823A9FE4500396732 /* ViewController.swift in Sources */,
 				D642BDDC23AA137C00396732 /* BoardView.swift in Sources */,
 				D642BDB423A9FE4500396732 /* AppDelegate.swift in Sources */,
+				F493C9A8246F9FE0003EB812 /* PlatformButton.swift in Sources */,
 				F493C96524628ABA003EB812 /* ReversiEngine.swift in Sources */,
 				F493C9A0246F8AF4003EB812 /* PlatformView.swift in Sources */,
+				F493C9A5246F9F07003EB812 /* PlatformControl.swift in Sources */,
+				F493C9AB246FA2D0003EB812 /* PlatformImage.swift in Sources */,
 				D642BDB623A9FE4500396732 /* SceneDelegate.swift in Sources */,
 				F493C9672467F3F6003EB812 /* Board.swift in Sources */,
 			);
@@ -420,14 +425,17 @@
 				F493C99E246F8909003EB812 /* GraphicsContext.swift in Sources */,
 				F493C9A3246F8EE2003EB812 /* BoardView.swift in Sources */,
 				F493C98C2468055F003EB812 /* Disk.swift in Sources */,
+				F493C9AD246FB9C9003EB812 /* CellView.swift in Sources */,
 				F493C99B246F86CE003EB812 /* Color.swift in Sources */,
 				F493C97124680523003EB812 /* ViewController.swift in Sources */,
 				F493C96F24680523003EB812 /* AppDelegate.swift in Sources */,
 				F493C9A2246F8C60003EB812 /* DiskView.swift in Sources */,
+				F493C9A9246FA042003EB812 /* PlatformButton.swift in Sources */,
 				F493C99824699B84003EB812 /* ViewAnimation.swift in Sources */,
 				F493C9A1246F8B7F003EB812 /* PlatformView.swift in Sources */,
+				F493C9A6246F9F59003EB812 /* PlatformControl.swift in Sources */,
+				F493C9AC246FA4E1003EB812 /* PlatformImage.swift in Sources */,
 				F493C98A24680552003EB812 /* Board.swift in Sources */,
-				F493C99124681466003EB812 /* CellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

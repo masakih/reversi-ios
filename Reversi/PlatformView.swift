@@ -16,13 +16,15 @@ import AppKit
 public typealias PlatformView = NSView
 #endif
 
+
 #if os(iOS)
 
-public extension UIControl {
+public extension UIView {
     
-    func addNormalAction(_ target: AnyObject, action: Selector) {
+    var enableViewAnimation: Bool {
         
-        addTarget(target, action: action, for: .touchUpInside)
+        get { !translatesAutoresizingMaskIntoConstraints }
+        set { translatesAutoresizingMaskIntoConstraints = !newValue }
     }
 }
 
@@ -44,18 +46,26 @@ public extension NSView {
         set {}
     }
     
+    var enableViewAnimation: Bool {
+        
+        get { true }
+        set { }
+    }
+    
+    var alpha: CGFloat {
+        
+        get { alphaValue }
+        set { alphaValue = newValue }
+    }
+    
     func setNeedsDisplay() {
         
         needsDisplay = true
     }
-}
-
-public extension NSControl {
     
-    func addNormalAction(_ target: AnyObject, action: Selector) {
+    func setNeedsLayout() {
         
-        self.target = target
-        self.action = action
+        needsLayout = true
     }
 }
 
