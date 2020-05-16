@@ -27,20 +27,20 @@ final class ReversiEngine {
     
     @Published private(set) var counts: (Int, Int) = (0, 0)
     
-    @Published var blackPlayer: Player = .manual {
+    @Published var darkPlayer: Player = .manual {
         
         didSet {
             
-            if !isAnimating, currentPlayer == blackPlayer, case .computer = blackPlayer {
+            if !isAnimating, currentPlayer == darkPlayer, case .computer = darkPlayer {
                 playTurnOfComputer()
             }
         }
     }
-    @Published var whitePlayer: Player = .manual {
+    @Published var lightPlayer: Player = .manual {
            
            didSet {
                
-               if !isAnimating, currentPlayer == whitePlayer, case .computer = whitePlayer {
+               if !isAnimating, currentPlayer == lightPlayer, case .computer = lightPlayer {
                    playTurnOfComputer()
                }
            }
@@ -63,8 +63,8 @@ final class ReversiEngine {
     var currentPlayer: Player? {
         
         switch turn {
-        case .dark?: return blackPlayer
-        case .light?: return whitePlayer
+        case .dark?: return darkPlayer
+        case .light?: return lightPlayer
         case .none: return nil
         }
     }
@@ -264,8 +264,8 @@ extension ReversiEngine {
     func newGame() {
         board.reset()
         turn = .dark
-        blackPlayer = .manual
-        whitePlayer = .manual
+        darkPlayer = .manual
+        lightPlayer = .manual
         
         updateCounts()
         
@@ -370,8 +370,8 @@ extension ReversiEngine {
     func saveGame() throws {
         var output: String = ""
         output += turn.symbol
-        output += blackPlayer.rawValue.description
-        output += whitePlayer.rawValue.description
+        output += darkPlayer.rawValue.description
+        output += lightPlayer.rawValue.description
         output += "\n"
         
         board.allLines
@@ -412,15 +412,15 @@ extension ReversiEngine {
 
         // players
         guard
-            let blackPlayerSymbol = line.popFirst(),
-            let blackPlayerNumber = Int(blackPlayerSymbol.description),
-            let whitePlayerSymbol = line.popFirst(),
-            let whitePlayerNumber = Int(whitePlayerSymbol.description)
+            let darkPlayerSymbol = line.popFirst(),
+            let darkPlayerNumber = Int(darkPlayerSymbol.description),
+            let lightPlayerSymbol = line.popFirst(),
+            let lightPlayerNumber = Int(lightPlayerSymbol.description)
             else {
                 throw FileIOError.read(path: path, cause: nil)
         }
-        blackPlayer = Player(rawValue: blackPlayerNumber) ?? .manual
-        whitePlayer = Player(rawValue: whitePlayerNumber) ?? .manual
+        darkPlayer = Player(rawValue: darkPlayerNumber) ?? .manual
+        lightPlayer = Player(rawValue: lightPlayerNumber) ?? .manual
 
         do { // board
             guard lines.count == board.height else {

@@ -640,15 +640,15 @@
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="blackActivityIndicators" destination="vcp-68-IFZ" id="Mop-AW-Zd4"/>
-                        <outlet property="blackComputerSwitch" destination="sn8-RL-Xgb" id="v68-UM-nJm"/>
-                        <outlet property="blackCountField" destination="YAK-ui-zFt" id="WEG-IM-SuY"/>
                         <outlet property="boardView" destination="mIf-Wd-Ene" id="uko-4C-4NP"/>
+                        <outlet property="darkActivityIndicators" destination="vcp-68-IFZ" id="Mop-AW-Zd4"/>
+                        <outlet property="darkComputerSwitch" destination="sn8-RL-Xgb" id="v68-UM-nJm"/>
+                        <outlet property="darkCountField" destination="YAK-ui-zFt" id="WEG-IM-SuY"/>
+                        <outlet property="lightActivityIndicators" destination="pah-x9-m1P" id="KPl-RP-zTp"/>
+                        <outlet property="lightComputerSwitch" destination="fMj-Bz-VYt" id="tfW-l3-Voj"/>
+                        <outlet property="lightCountField" destination="H64-iG-kwJ" id="eSR-Ju-DwC"/>
                         <outlet property="messageDiskView" destination="3RO-hB-JHU" id="XrH-Nr-XRf"/>
                         <outlet property="messageField" destination="V4k-ph-X93" id="fDu-om-JNK"/>
-                        <outlet property="whiteActivityIndicators" destination="pah-x9-m1P" id="KPl-RP-zTp"/>
-                        <outlet property="whiteComputerSwitch" destination="fMj-Bz-VYt" id="tfW-l3-Voj"/>
-                        <outlet property="whiteCountField" destination="H64-iG-kwJ" id="eSR-Ju-DwC"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -39,19 +39,19 @@ class ViewController: UIViewController {
         }
         .store(in: &calcel)
         
-        reversiEngine.$blackPlayer
+        reversiEngine.$darkPlayer
             .receive(on: DispatchQueue.main)
-            .map { blackPlayer in blackPlayer.rawValue }
-            .sink { blackPlayer in
-                self.playerControls[0].selectedSegmentIndex = blackPlayer
+            .map { darkPlayer in darkPlayer.rawValue }
+            .sink { darkPlayer in
+                self.playerControls[0].selectedSegmentIndex = darkPlayer
         }
         .store(in: &calcel)
         
-        reversiEngine.$whitePlayer
+        reversiEngine.$lightPlayer
             .receive(on: DispatchQueue.main)
-            .map { whitePlayer in whitePlayer.rawValue }
-            .sink { whitePlayer in
-                self.playerControls[1].selectedSegmentIndex = whitePlayer
+            .map { lightPlayer in lightPlayer.rawValue }
+            .sink { lightPlayer in
+                self.playerControls[1].selectedSegmentIndex = lightPlayer
         }
         .store(in: &calcel)
         
@@ -119,8 +119,8 @@ extension ViewController {
         
         
         switch side {
-        case .dark: reversiEngine.blackPlayer = ReversiEngine.Player(rawValue: sender.selectedSegmentIndex)!
-        case .light: reversiEngine.whitePlayer = ReversiEngine.Player(rawValue: sender.selectedSegmentIndex)!
+        case .dark: reversiEngine.darkPlayer = ReversiEngine.Player(rawValue: sender.selectedSegmentIndex)!
+        case .light: reversiEngine.lightPlayer = ReversiEngine.Player(rawValue: sender.selectedSegmentIndex)!
         }
     }
 }

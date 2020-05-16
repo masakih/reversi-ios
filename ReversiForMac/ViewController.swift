@@ -14,18 +14,18 @@ class ViewController: NSViewController {
     
     @IBOutlet private var boardView: BoardView!
     
-    @IBOutlet private var blackCountField: NSTextField!
-    @IBOutlet private var whiteCountField: NSTextField!
+    @IBOutlet private var darkCountField: NSTextField!
+    @IBOutlet private var lightCountField: NSTextField!
     
-    @IBOutlet private var blackComputerSwitch: NSSwitch!
-    @IBOutlet private var whiteComputerSwitch: NSSwitch!
+    @IBOutlet private var darkComputerSwitch: NSSwitch!
+    @IBOutlet private var lightComputerSwitch: NSSwitch!
 
     
     @IBOutlet private var messageDiskView: DiskView!
     @IBOutlet private var messageField: NSTextField!
     
-    @IBOutlet private var blackActivityIndicators: NSProgressIndicator!
-    @IBOutlet private var whiteActivityIndicators: NSProgressIndicator!
+    @IBOutlet private var darkActivityIndicators: NSProgressIndicator!
+    @IBOutlet private var lightActivityIndicators: NSProgressIndicator!
     
     private var reversiEngine: ReversiEngine!
     private var calcel: Set<AnyCancellable> = []
@@ -40,21 +40,21 @@ class ViewController: NSViewController {
         .receive(on: DispatchQueue.main)
         .map{ counts in (String(counts.0), String(counts.1)) }
         .sink { counts in
-            (self.blackCountField.stringValue, self.whiteCountField.stringValue) = counts
+            (self.darkCountField.stringValue, self.lightCountField.stringValue) = counts
     }
     .store(in: &calcel)
     
-    reversiEngine.$blackPlayer
+    reversiEngine.$darkPlayer
         .receive(on: DispatchQueue.main)
-        .sink { blackPlayer in
-            self.blackComputerSwitch.state = (blackPlayer == .computer) ? .on : .off
+        .sink { darkPlayer in
+            self.darkComputerSwitch.state = (darkPlayer == .computer) ? .on : .off
     }
     .store(in: &calcel)
     
-    reversiEngine.$whitePlayer
+    reversiEngine.$lightPlayer
         .receive(on: DispatchQueue.main)
-        .sink { whitePlayer in
-            self.whiteComputerSwitch.state = (whitePlayer == .computer) ? .on : .off
+        .sink { lightPlayer in
+            self.lightComputerSwitch.state = (lightPlayer == .computer) ? .on : .off
     }
     .store(in: &calcel)
     
@@ -108,10 +108,10 @@ extension ViewController {
     @IBAction func changePlayerSwitch(_ sender: NSSwitch) {
 
         switch sender {
-        case blackComputerSwitch:
-            reversiEngine.blackPlayer = sender.state == .on ? .computer : .manual
-        case whiteComputerSwitch:
-            reversiEngine.whitePlayer = sender.state == .on ? .computer : .manual
+        case darkComputerSwitch:
+            reversiEngine.darkPlayer = sender.state == .on ? .computer : .manual
+        case lightComputerSwitch:
+            reversiEngine.lightPlayer = sender.state == .on ? .computer : .manual
         default: fatalError("Unknown switch")
         }
     }
@@ -121,12 +121,12 @@ extension ViewController: ReversiEngineDelegate {
     
     func beginComputerThinking(_ reversi: ReversiEngine, turn: Disk) {
         
-        [blackActivityIndicators, whiteActivityIndicators][turn.index].startAnimation(nil)
+        [darkActivityIndicators, lightActivityIndicators][turn.index].startAnimation(nil)
     }
     
     func endComputerThinking(_ reversi: ReversiEngine, turn: Disk) {
         
-         [blackActivityIndicators, whiteActivityIndicators][turn.index].stopAnimation(nil)
+         [darkActivityIndicators, lightActivityIndicators][turn.index].stopAnimation(nil)
     }
     
     func willPass(_ reversi: ReversiEngine, turn: Disk, completion: @escaping () -> Void) {
