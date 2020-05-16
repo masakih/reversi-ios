@@ -90,18 +90,17 @@ extension ViewController {
     /// "OK" が選択された場合ゲームを初期化します。
     @IBAction func pressResetButton(_ sender: NSButton) {
         
-        let alert = NSAlert()
-        alert.messageText = "Confirmation"
-        alert.informativeText = "Do you really want to reset the game?"
-        alert.addButton(withTitle: "Cancel")
-        alert.addButton(withTitle: "OK")
-        alert.beginSheetModal(for: view.window!) { [weak self] res in
-            
-            if res == .alertSecondButtonReturn {
-                
-                self?.reversiEngine.reset()
-            }
-        }
+        let alert = Alert(
+            title: "Confirmation",
+            message: "Do you really want to reset the game?"
+        )
+        alert.addAction(AlertAction(title: "Cancel", style: .calcel) { _ in })
+        alert.addAction(AlertAction(title: "OK", style: .default) { [weak self] _ in
+
+            self?.reversiEngine.reset()
+        })
+        
+        alert.show(for: self)
     }
     
     /// プレイヤーのモードが変更された場合に呼ばれるハンドラーです。
@@ -131,13 +130,18 @@ extension ViewController: ReversiEngineDelegate {
     
     func willPass(_ reversi: ReversiEngine, turn: Disk, completion: @escaping () -> Void) {
         
-        let alert = NSAlert()
-        alert.messageText = "Pass"
-        alert.informativeText = "Cannot place a disk."
-        alert.beginSheetModal(for: view.window!) { res in
+        let alert = Alert(
+            title: "Pass",
+            message: "Cannot place a disk."
+        )
+        
+        // TODO: 文字列をfor iOSとfor macOSで差し替え出来るようにすること
+        alert.addAction(AlertAction(title: "OK", style: .default) { _ in
             
             completion()
-        }
+        })
+        
+        alert.show(for: self)
     }
 }
 

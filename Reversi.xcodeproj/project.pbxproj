@@ -45,6 +45,8 @@
 		F493C9AB246FA2D0003EB812 /* PlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9AA246FA2D0003EB812 /* PlatformImage.swift */; };
 		F493C9AC246FA4E1003EB812 /* PlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9AA246FA2D0003EB812 /* PlatformImage.swift */; };
 		F493C9AD246FB9C9003EB812 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDD523AA0B3900396732 /* CellView.swift */; };
+		F493C9AF246FC544003EB812 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9AE246FC544003EB812 /* Alert.swift */; };
+		F493C9B0246FD3C2003EB812 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9AE246FC544003EB812 /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +101,7 @@
 		F493C9A4246F9F07003EB812 /* PlatformControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformControl.swift; sourceTree = "<group>"; };
 		F493C9A7246F9FE0003EB812 /* PlatformButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformButton.swift; sourceTree = "<group>"; };
 		F493C9AA246FA2D0003EB812 /* PlatformImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImage.swift; sourceTree = "<group>"; };
+		F493C9AE246FC544003EB812 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +142,9 @@
 				D642BDDB23AA137C00396732 /* BoardView.swift */,
 				D642BDD523AA0B3900396732 /* CellView.swift */,
 				D636B39E23D35043007F370F /* DiskView.swift */,
+				F493C99F246F8AF4003EB812 /* PlatformView.swift */,
+				F493C9A4246F9F07003EB812 /* PlatformControl.swift */,
+				F493C9A7246F9FE0003EB812 /* PlatformButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -149,9 +155,6 @@
 				D642BDD723AA0B5700396732 /* Disk.swift */,
 				F493C999246F855D003EB812 /* Color.swift */,
 				F493C99C246F8819003EB812 /* GraphicsContext.swift */,
-				F493C99F246F8AF4003EB812 /* PlatformView.swift */,
-				F493C9A4246F9F07003EB812 /* PlatformControl.swift */,
-				F493C9A7246F9FE0003EB812 /* PlatformButton.swift */,
 				F493C9AA246FA2D0003EB812 /* PlatformImage.swift */,
 			);
 			name = DataTypes;
@@ -187,6 +190,7 @@
 				D642BDB723A9FE4500396732 /* ViewController.swift */,
 				F493C9662467F3F6003EB812 /* Board.swift */,
 				F493C96424628AB9003EB812 /* ReversiEngine.swift */,
+				F493C9AE246FC544003EB812 /* Alert.swift */,
 				D642BDB923A9FE4500396732 /* Main.storyboard */,
 				D642BDBC23A9FE4700396732 /* Assets.xcassets */,
 				D642BDBE23A9FE4700396732 /* LaunchScreen.storyboard */,
@@ -405,6 +409,7 @@
 				F493C9A5246F9F07003EB812 /* PlatformControl.swift in Sources */,
 				F493C9AB246FA2D0003EB812 /* PlatformImage.swift in Sources */,
 				D642BDB623A9FE4500396732 /* SceneDelegate.swift in Sources */,
+				F493C9AF246FC544003EB812 /* Alert.swift in Sources */,
 				F493C9672467F3F6003EB812 /* Board.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,6 +440,7 @@
 				F493C9A1246F8B7F003EB812 /* PlatformView.swift in Sources */,
 				F493C9A6246F9F59003EB812 /* PlatformControl.swift in Sources */,
 				F493C9AC246FA4E1003EB812 /* PlatformImage.swift in Sources */,
+				F493C9B0246FD3C2003EB812 /* Alert.swift in Sources */,
 				F493C98A24680552003EB812 /* Board.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

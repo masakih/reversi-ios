@@ -99,17 +99,18 @@ extension ViewController {
     /// アラートを表示して、ゲームを初期化して良いか確認し、
     /// "OK" が選択された場合ゲームを初期化します。
     @IBAction func pressResetButton(_ sender: UIButton) {
-        let alertController = UIAlertController(
+        
+        let alert = Alert(
             title: "Confirmation",
-            message: "Do you really want to reset the game?",
-            preferredStyle: .alert
+            message: "Do you really want to reset the game?"
         )
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in })
-        alertController.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+        alert.addAction(AlertAction(title: "Cancel", style: .calcel) { _ in })
+        alert.addAction(AlertAction(title: "OK", style: .default) { [weak self] _ in
 
             self?.reversiEngine.reset()
         })
-        present(alertController, animated: true)
+        
+        alert.show(for: self)
     }
     
     /// プレイヤーのモードが変更された場合に呼ばれるハンドラーです。
@@ -140,16 +141,16 @@ extension ViewController: ReversiEngineDelegate {
     
     func willPass(_ reversi: ReversiEngine, turn: Disk, completion: @escaping () -> Void) {
         
-        let alertController = UIAlertController(
+        let alert = Alert(
             title: "Pass",
-            message: "Cannot place a disk.",
-            preferredStyle: .alert
+            message: "Cannot place a disk."
         )
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default) { _ in
-                        
+        alert.addAction(AlertAction(title: "Dismiss", style: .default) { _ in
+            
             completion()
         })
-        present(alertController, animated: true)
+        
+        alert.show(for: self)
     }
 }
 
