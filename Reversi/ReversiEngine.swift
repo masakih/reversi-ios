@@ -119,30 +119,35 @@ extension ReversiEngine {
             return []
         }
         
-        var diskCoordinates: [(Int, Int)] = []
-        
-        for direction in directions {
-            var x = x
-            var y = y
+        /// その方向がひっくり返せるかを調べる
+        func canFlip(_ direction: (x: Int, y: Int)) -> Bool {
             
-            var diskCoordinatesInLine: [(Int, Int)] = []
-            flipping: while true {
-                x += direction.x
-                y += direction.y
+            func searchSame(x: Int, y: Int) -> Bool {
                 
-                switch (disk, board.diskAt(x: x, y: y)) { // Uses tuples to make patterns exhaustive
-                case (.dark, .some(.dark)), (.light, .some(.light)):
-                    diskCoordinates.append(contentsOf: diskCoordinatesInLine)
-                    break flipping
-                case (.dark, .some(.light)), (.light, .some(.dark)):
-                    diskCoordinatesInLine.append((x, y))
-                case (_, .none):
-                    break flipping
-                }
+                let (x, y) = (x + direction.x, y + direction.y)
+                guard let targetDisk = board.diskAt(x: x, y: y) else { return false }
+                if targetDisk == disk { return true }
+                
+                return searchSame(x: x, y: y)
             }
+            
+            let (x, y) = (x + direction.x, y + direction.y)
+            guard let targetDisk = board.diskAt(x: x, y: y) else { return false }
+            if targetDisk == disk { return false }
+            
+            return searchSame(x: x, y: y)
         }
         
-        return diskCoordinates
+        /// その方向でひっくり返せるコマの座標の配列を返す
+        /// 指定する方向はひっくり返せることが分かっていなければならない
+        func flippedCoordinates(by direction: (x: Int, y: Int)) -> [(Int, Int)] {
+            
+            (1...10).lazy
+                .map { (x + direction.x * $0, y + direction.y * $0) }
+                .prefix { coordinate in board.diskAt(x: coordinate.0, y: coordinate.1) != disk }
+        }
+        
+        return directions.filter(canFlip(_:)).flatMap(flippedCoordinates(by:))
     }
     
     /// `x`, `y` で指定されたセルに、 `disk` が置けるかを調べます。
