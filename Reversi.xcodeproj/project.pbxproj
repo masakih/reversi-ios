@@ -47,6 +47,10 @@
 		F493C9AD246FB9C9003EB812 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDD523AA0B3900396732 /* CellView.swift */; };
 		F493C9AF246FC544003EB812 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9AE246FC544003EB812 /* Alert.swift */; };
 		F493C9B0246FD3C2003EB812 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9AE246FC544003EB812 /* Alert.swift */; };
+		F493C9B2247009C4003EB812 /* PlatformSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B1247009C4003EB812 /* PlatformSwitcher.swift */; };
+		F493C9B324700B1A003EB812 /* PlatformSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B1247009C4003EB812 /* PlatformSwitcher.swift */; };
+		F493C9B7247010D5003EB812 /* ViewController-extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B6247010D5003EB812 /* ViewController-extensions.swift */; };
+		F493C9B824701214003EB812 /* ViewController-extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B6247010D5003EB812 /* ViewController-extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +106,8 @@
 		F493C9A7246F9FE0003EB812 /* PlatformButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformButton.swift; sourceTree = "<group>"; };
 		F493C9AA246FA2D0003EB812 /* PlatformImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImage.swift; sourceTree = "<group>"; };
 		F493C9AE246FC544003EB812 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		F493C9B1247009C4003EB812 /* PlatformSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformSwitcher.swift; sourceTree = "<group>"; };
+		F493C9B6247010D5003EB812 /* ViewController-extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController-extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +151,7 @@
 				F493C99F246F8AF4003EB812 /* PlatformView.swift */,
 				F493C9A4246F9F07003EB812 /* PlatformControl.swift */,
 				F493C9A7246F9FE0003EB812 /* PlatformButton.swift */,
+				F493C9B1247009C4003EB812 /* PlatformSwitcher.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -188,6 +195,7 @@
 				D642BDB323A9FE4500396732 /* AppDelegate.swift */,
 				D642BDB523A9FE4500396732 /* SceneDelegate.swift */,
 				D642BDB723A9FE4500396732 /* ViewController.swift */,
+				F493C9B6247010D5003EB812 /* ViewController-extensions.swift */,
 				F493C9662467F3F6003EB812 /* Board.swift */,
 				F493C96424628AB9003EB812 /* ReversiEngine.swift */,
 				F493C9AE246FC544003EB812 /* Alert.swift */,
@@ -407,9 +415,11 @@
 				F493C96524628ABA003EB812 /* ReversiEngine.swift in Sources */,
 				F493C9A0246F8AF4003EB812 /* PlatformView.swift in Sources */,
 				F493C9A5246F9F07003EB812 /* PlatformControl.swift in Sources */,
+				F493C9B7247010D5003EB812 /* ViewController-extensions.swift in Sources */,
 				F493C9AB246FA2D0003EB812 /* PlatformImage.swift in Sources */,
 				D642BDB623A9FE4500396732 /* SceneDelegate.swift in Sources */,
 				F493C9AF246FC544003EB812 /* Alert.swift in Sources */,
+				F493C9B2247009C4003EB812 /* PlatformSwitcher.swift in Sources */,
 				F493C9672467F3F6003EB812 /* Board.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,9 +448,11 @@
 				F493C9A9246FA042003EB812 /* PlatformButton.swift in Sources */,
 				F493C99824699B84003EB812 /* ViewAnimation.swift in Sources */,
 				F493C9A1246F8B7F003EB812 /* PlatformView.swift in Sources */,
+				F493C9B824701214003EB812 /* ViewController-extensions.swift in Sources */,
 				F493C9A6246F9F59003EB812 /* PlatformControl.swift in Sources */,
 				F493C9AC246FA4E1003EB812 /* PlatformImage.swift in Sources */,
 				F493C9B0246FD3C2003EB812 /* Alert.swift in Sources */,
+				F493C9B324700B1A003EB812 /* PlatformSwitcher.swift in Sources */,
 				F493C98A24680552003EB812 /* Board.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

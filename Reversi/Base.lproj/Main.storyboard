@@ -75,7 +75,7 @@
                                             <segment title="Computer"/>
                                         </segments>
                                         <connections>
-                                            <action selector="changePlayerControlSegment:" destination="BYZ-38-t0r" eventType="valueChanged" id="f7K-Cm-17Z"/>
+                                            <action selector="changePlayer:" destination="BYZ-38-t0r" eventType="valueChanged" id="f7K-Cm-17Z"/>
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGE-KP-oHh">
@@ -122,7 +122,7 @@
                                             <segment title="Computer"/>
                                         </segments>
                                         <connections>
-                                            <action selector="changePlayerControlSegment:" destination="BYZ-38-t0r" eventType="valueChanged" id="9el-1b-nyF"/>
+                                            <action selector="changePlayer:" destination="BYZ-38-t0r" eventType="valueChanged" id="9el-1b-nyF"/>
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMh-5o-Uqc">

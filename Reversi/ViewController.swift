@@ -3,7 +3,7 @@ import UIKit
 import Combine
 
 class ViewController: UIViewController {
-    @IBOutlet private var boardView: BoardView!
+    @IBOutlet private(set) var boardView: BoardView!
     
     @IBOutlet private var messageDiskView: DiskView!
     @IBOutlet private var messageLabel: UILabel!
@@ -21,64 +21,85 @@ class ViewController: UIViewController {
     @IBOutlet private var playerActivityIndicators: [UIActivityIndicatorView]!
     
     
-    private var reversiEngine: ReversiEngine!
-    private var calcel: Set<AnyCancellable> = []
+    var reversiEngine: ReversiEngine!
+    var calcel: Set<AnyCancellable> = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var counts: (Int, Int) {
+        
+        get {
+            
+            (
+                countLabels[0].text.flatMap(Int.init) ?? 0,
+                countLabels[1].text.flatMap(Int.init) ?? 0
+            )
+        }
+        set {
+            countLabels[0].text = String(newValue.0)
+            countLabels[1].text = String(newValue.1)
+        }
+    }
+    
+    var darkPlayer: ReversiEngine.Player {
+        
+        get {
+            playerControls[0].selectedSegmentIndex == 0 ? .manual : .computer
+        }
+        set {
+            playerControls[0].selectedSegmentIndex = newValue.rawValue
+        }
+    }
+    
+    var lightPlayer: ReversiEngine.Player {
+        
+        get {
+            playerControls[1].selectedSegmentIndex == 0 ? .manual : .computer
+        }
+        set {
+            playerControls[1].selectedSegmentIndex = newValue.rawValue
+        }
+    }
+    
+    var turn: Disk? {
+        
+        get { messageDiskView.disk }
+        set {
+            
+            switch newValue {
+            case .some(let side):
+                self.messageDiskSizeConstraint.constant = self.messageDiskSize
+                self.messageDiskView.disk = side
+                self.messageLabel.text = "'s turn"
+            case .none:
+                if let winner = self.reversiEngine.sideWithMoreDisks() {
+                    self.messageDiskSizeConstraint.constant = self.messageDiskSize
+                    self.messageDiskView.disk = winner
+                    self.messageLabel.text = " won"
+                } else {
+                    self.messageDiskSizeConstraint.constant = 0
+                    self.messageLabel.text = "Tied"
+                }
+            }
+        }
+    }
+    
+    func side(for switcher: PlatformSwitcher) -> Disk {
+        
+        Disk(index: playerControls.firstIndex(of: switcher)!)
+    }
+    
+    func setUp() {
         
         messageDiskSize = messageDiskSizeConstraint.constant
+    }
+    
+    func startThinking(turn: Disk) {
         
-        reversiEngine = ReversiEngine(boardView)
+        playerActivityIndicators[turn.index].startAnimating()
+    }
+    
+    func endThinking(turn: Disk) {
         
-        reversiEngine.$counts
-            .receive(on: DispatchQueue.main)
-            .map{ counts in (String(counts.0), String(counts.1)) }
-            .sink { counts in
-                (self.countLabels[0].text, self.countLabels[1].text) = counts
-        }
-        .store(in: &calcel)
-        
-        reversiEngine.$darkPlayer
-            .receive(on: DispatchQueue.main)
-            .map { darkPlayer in darkPlayer.rawValue }
-            .sink { darkPlayer in
-                self.playerControls[0].selectedSegmentIndex = darkPlayer
-        }
-        .store(in: &calcel)
-        
-        reversiEngine.$lightPlayer
-            .receive(on: DispatchQueue.main)
-            .map { lightPlayer in lightPlayer.rawValue }
-            .sink { lightPlayer in
-                self.playerControls[1].selectedSegmentIndex = lightPlayer
-        }
-        .store(in: &calcel)
-        
-        reversiEngine.$turn
-            .receive(on: DispatchQueue.main)
-            .sink { turn in
-                switch turn {
-                case .some(let side):
-                    self.messageDiskSizeConstraint.constant = self.messageDiskSize
-                    self.messageDiskView.disk = side
-                    self.messageLabel.text = "'s turn"
-                case .none:
-                    if let winner = self.reversiEngine.sideWithMoreDisks() {
-                        self.messageDiskSizeConstraint.constant = self.messageDiskSize
-                        self.messageDiskView.disk = winner
-                        self.messageLabel.text = " won"
-                    } else {
-                        self.messageDiskSizeConstraint.constant = 0
-                        self.messageLabel.text = "Tied"
-                    }
-                }
-        }
-        .store(in: &calcel)
-        
-        reversiEngine.delegate = self
-        
-        reversiEngine.start()
+        playerActivityIndicators[turn.index].stopAnimating()
     }
     
     private var viewHasAppeared: Bool = false
@@ -90,70 +111,6 @@ class ViewController: UIViewController {
         reversiEngine.waitForPlayer()
     }
 }
-
-
-// MARK: Inputs
-
-extension ViewController {
-    /// リセットボタンが押された場合に呼ばれるハンドラーです。
-    /// アラートを表示して、ゲームを初期化して良いか確認し、
-    /// "OK" が選択された場合ゲームを初期化します。
-    @IBAction func pressResetButton(_ sender: UIButton) {
-        
-        let alert = Alert(
-            title: "Confirmation",
-            message: "Do you really want to reset the game?"
-        )
-        alert.addAction(AlertAction(title: "Cancel", style: .calcel) { _ in })
-        alert.addAction(AlertAction(title: "OK", style: .default) { [weak self] _ in
-
-            self?.reversiEngine.reset()
-        })
-        
-        alert.show(for: self)
-    }
-    
-    /// プレイヤーのモードが変更された場合に呼ばれるハンドラーです。
-    @IBAction func changePlayerControlSegment(_ sender: UISegmentedControl) {
-        
-        let side: Disk = Disk(index: playerControls.firstIndex(of: sender)!)
-        
-        
-        switch side {
-        case .dark: reversiEngine.darkPlayer = ReversiEngine.Player(rawValue: sender.selectedSegmentIndex)!
-        case .light: reversiEngine.lightPlayer = ReversiEngine.Player(rawValue: sender.selectedSegmentIndex)!
-        }
-    }
-}
-
-
-extension ViewController: ReversiEngineDelegate {
-    
-    func beginComputerThinking(_ reversi: ReversiEngine, turn: Disk) {
-        
-        playerActivityIndicators[turn.index].startAnimating()
-    }
-    
-    func endComputerThinking(_ reversi: ReversiEngine, turn: Disk) {
-        
-        playerActivityIndicators[turn.index].stopAnimating()
-    }
-    
-    func willPass(_ reversi: ReversiEngine, turn: Disk, completion: @escaping () -> Void) {
-        
-        let alert = Alert(
-            title: "Pass",
-            message: "Cannot place a disk."
-        )
-        alert.addAction(AlertAction(title: "Dismiss", style: .default) { _ in
-            
-            completion()
-        })
-        
-        alert.show(for: self)
-    }
-}
-
 
 // MARK: File-private extensions
 
