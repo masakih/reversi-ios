@@ -2,7 +2,7 @@ import UIKit
 
 private let animationDuration: TimeInterval = 0.25
 
-public class CellView: UIView {
+public class CellView: UIControl {
     private let button: UIButton = UIButton()
     private let diskView: DiskView = DiskView()
     
@@ -117,23 +117,23 @@ public class CellView: UIView {
         }
     }
     
-    public func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
+    public override func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
         button.addTarget(target, action: action, for: controlEvents)
     }
     
-    public func removeTarget(_ target: Any?, action: Selector?, for controlEvents: UIControl.Event) {
+    public override func removeTarget(_ target: Any?, action: Selector?, for controlEvents: UIControl.Event) {
         button.removeTarget(target, action: action, for: controlEvents)
     }
     
-    public func actions(forTarget target: Any?, forControlEvent controlEvent: UIControl.Event) -> [String]? {
+    public override func actions(forTarget target: Any?, forControlEvent controlEvent: UIControl.Event) -> [String]? {
         button.actions(forTarget: target, forControlEvent: controlEvent)
     }
     
-    public var allTargets: Set<AnyHashable> {
+    public override var allTargets: Set<AnyHashable> {
         button.allTargets
     }
     
-    public var allControlEvents: UIControl.Event {
+    public override var allControlEvents: UIControl.Event {
         button.allControlEvents
     }
 }

@@ -1,8 +1,12 @@
+#if os(iOS)
 import UIKit
+#elseif os(macOS)
+import Cocoa
+#endif
 
 private let lineWidth: CGFloat = 2
 
-public class BoardView: UIView, Board {
+public class BoardView: PlatformView, Board {
     
     private var cellViews: [CellView] = []
     private var actions: [CellSelectionAction] = []
@@ -46,8 +50,19 @@ public class BoardView: UIView, Board {
         yRange.map { y in xRange.map { x in (x, y) } }
     }
     
+    #if os(macOS)
+    public override func draw(_ dirtyRect: NSRect) {
+        
+        defer { super.draw(dirtyRect) }
+        
+        guard let context = CGContext.current else { return }
+        context.setFillColor(Color(named: "DarkColor")!.cgColor)
+        context.fill(bounds)
+    }
+    #endif
+    
     private func setUp() {
-        self.backgroundColor = UIColor(named: "DarkColor")!
+        self.backgroundColor = Color(named: "DarkColor")!
         
         let cellViews: [CellView] = (0 ..< (width * height)).map { _ in
             let cellView = CellView()
@@ -109,7 +124,7 @@ public class BoardView: UIView, Board {
             let cellView: CellView = cellViewAt(x: x, y: y)!
             let action = CellSelectionAction(boardView: self, x: x, y: y)
             actions.append(action) // To retain the `action`
-            cellView.addTarget(action, action: #selector(action.selectCell), for: .touchUpInside)
+            cellView.addNormalAction(action, action: #selector(action.selectCell))
         }
     }
     
