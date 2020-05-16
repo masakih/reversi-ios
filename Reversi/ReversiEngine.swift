@@ -427,21 +427,19 @@ extension ReversiEngine {
                 throw FileIOError.read(path: path, cause: nil)
             }
             
-            var y = 0
-            while let line = lines.popFirst() {
-                var x = 0
-                for character in line {
-                    let disk = Disk?(symbol: "\(character)").flatMap { $0 }
-                    board.setDisk(disk, atX: x, y: y, animated: false)
-                    x += 1
-                }
-                guard x == board.width else {
-                    throw FileIOError.read(path: path, cause: nil)
-                }
-                y += 1
-            }
-            guard y == board.height else {
+            let disks = lines.map { line in line.compactMap { Disk?(symbol: "\($0)") } }
+            
+            guard disks.allSatisfy({ $0.count == board.width }) else {
+                
                 throw FileIOError.read(path: path, cause: nil)
+            }
+            
+            zip(0..., disks).forEach { y, diskLine in
+                
+                zip(0..., diskLine).forEach { x, disk in
+                    
+                    board.setDisk(disk, atX: x, y: y, animated: false)
+                }
             }
         }
         
