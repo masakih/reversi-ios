@@ -10,7 +10,7 @@ import Cocoa
 
 import Combine
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, ReversiViewControllerProtocol {
     
     @IBOutlet private(set) var boardView: BoardView!
     

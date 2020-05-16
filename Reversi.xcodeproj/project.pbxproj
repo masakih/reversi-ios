@@ -51,6 +51,8 @@
 		F493C9B324700B1A003EB812 /* PlatformSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B1247009C4003EB812 /* PlatformSwitcher.swift */; };
 		F493C9B7247010D5003EB812 /* ViewController-extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B6247010D5003EB812 /* ViewController-extensions.swift */; };
 		F493C9B824701214003EB812 /* ViewController-extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B6247010D5003EB812 /* ViewController-extensions.swift */; };
+		F493C9BA2470131B003EB812 /* ReversiViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B92470131B003EB812 /* ReversiViewControllerProtocol.swift */; };
+		F493C9BB247013CF003EB812 /* ReversiViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F493C9B92470131B003EB812 /* ReversiViewControllerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,7 @@
 		F493C9AE246FC544003EB812 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		F493C9B1247009C4003EB812 /* PlatformSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformSwitcher.swift; sourceTree = "<group>"; };
 		F493C9B6247010D5003EB812 /* ViewController-extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController-extensions.swift"; sourceTree = "<group>"; };
+		F493C9B92470131B003EB812 /* ReversiViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversiViewControllerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +197,7 @@
 			children = (
 				D642BDB323A9FE4500396732 /* AppDelegate.swift */,
 				D642BDB523A9FE4500396732 /* SceneDelegate.swift */,
+				F493C9B92470131B003EB812 /* ReversiViewControllerProtocol.swift */,
 				D642BDB723A9FE4500396732 /* ViewController.swift */,
 				F493C9B6247010D5003EB812 /* ViewController-extensions.swift */,
 				F493C9662467F3F6003EB812 /* Board.swift */,
@@ -415,6 +419,7 @@
 				F493C96524628ABA003EB812 /* ReversiEngine.swift in Sources */,
 				F493C9A0246F8AF4003EB812 /* PlatformView.swift in Sources */,
 				F493C9A5246F9F07003EB812 /* PlatformControl.swift in Sources */,
+				F493C9BA2470131B003EB812 /* ReversiViewControllerProtocol.swift in Sources */,
 				F493C9B7247010D5003EB812 /* ViewController-extensions.swift in Sources */,
 				F493C9AB246FA2D0003EB812 /* PlatformImage.swift in Sources */,
 				D642BDB623A9FE4500396732 /* SceneDelegate.swift in Sources */,
@@ -448,6 +453,7 @@
 				F493C9A9246FA042003EB812 /* PlatformButton.swift in Sources */,
 				F493C99824699B84003EB812 /* ViewAnimation.swift in Sources */,
 				F493C9A1246F8B7F003EB812 /* PlatformView.swift in Sources */,
+				F493C9BB247013CF003EB812 /* ReversiViewControllerProtocol.swift in Sources */,
 				F493C9B824701214003EB812 /* ViewController-extensions.swift in Sources */,
 				F493C9A6246F9F59003EB812 /* PlatformControl.swift in Sources */,
 				F493C9AC246FA4E1003EB812 /* PlatformImage.swift in Sources */,

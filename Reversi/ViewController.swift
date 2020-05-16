@@ -2,7 +2,7 @@ import UIKit
 
 import Combine
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ReversiViewControllerProtocol {
     @IBOutlet private(set) var boardView: BoardView!
     
     @IBOutlet private var messageDiskView: DiskView!
