@@ -52,7 +52,7 @@ extension ViewController {
     /// リセットボタンが押された場合に呼ばれるハンドラーです。
     /// アラートを表示して、ゲームを初期化して良いか確認し、
     /// "OK" が選択された場合ゲームを初期化します。
-    @IBAction func pressResetButton(_ sender: PlatformButton) {
+    @IBAction func pressResetButton(_ sender: Any?) {
         
         let alert = Alert(
             title: "Confirmation",

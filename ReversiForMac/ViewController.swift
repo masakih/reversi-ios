@@ -92,6 +92,15 @@ class ViewController: NSViewController, ReversiViewControllerProtocol {
     }
 }
 
+// MARK: Actions
+extension ViewController {
+    
+    @IBAction private func reset(_ sender: Any?) {
+        
+        pressResetButton(sender)
+    }
+}
+
 
 // MARK: File-private extensions
 
