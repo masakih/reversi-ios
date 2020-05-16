@@ -96,6 +96,7 @@ extension ViewController: ReversiEngineDelegate {
             title: "Pass",
             message: "Cannot place a disk."
         )
+        // TODO: titleを for iOSとfor macOSで差し替えられるようにすること
         alert.addAction(AlertAction(title: "Dismiss", style: .default) { _ in
             
             completion()
