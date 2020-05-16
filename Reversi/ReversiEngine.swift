@@ -86,7 +86,7 @@ extension ReversiEngine {
     /// `side` で指定された色のディスクが盤上に置かれている枚数を返します。
     /// - Parameter side: 数えるディスクの色です。
     /// - Returns: `side` で指定された色のディスクの、盤上の枚数です。
-    func countDisks(of side: Disk) -> Int {
+    private func countDisks(of side: Disk) -> Int {
 
         board.allCells
             .filter { vector in board.diskAt(x: vector.0, y: vector.1) == side  }
@@ -159,13 +159,13 @@ extension ReversiEngine {
     /// - Parameter x: セルの列です。
     /// - Parameter y: セルの行です。
     /// - Returns: 指定されたセルに `disk` を置ける場合は `true` を、置けない場合は `false` を返します。
-    func canPlaceDisk(_ disk: Disk, atX x: Int, y: Int) -> Bool {
+    private func canPlaceDisk(_ disk: Disk, atX x: Int, y: Int) -> Bool {
         !flippedDiskCoordinatesByPlacingDisk(disk, atX: x, y: y).isEmpty
     }
     
     /// `side` で指定された色のディスクを置ける盤上のセルの座標をすべて返します。
     /// - Returns: `side` で指定された色のディスクを置ける盤上のすべてのセルの座標の配列です。
-    func validMoves(for side: Disk) -> [(x: Int, y: Int)] {
+    private func validMoves(for side: Disk) -> [(x: Int, y: Int)] {
         
         board.allCells
             .filter { vector in canPlaceDisk(side, atX: vector.0, y: vector.1) }
@@ -179,7 +179,7 @@ extension ReversiEngine {
     ///     このクロージャは値を返さず、アニメーションが完了したかを示す真偽値を受け取ります。
     ///     もし `animated` が `false` の場合、このクロージャは次の run loop サイクルの初めに実行されます。
     /// - Throws: もし `disk` を `x`, `y` で指定されるセルに置けない場合、 `DiskPlacementError` を `throw` します。
-    func placeDisk(_ disk: Disk, atX x: Int, y: Int, animated isAnimated: Bool, completion: ((Bool) -> Void)? = nil) throws {
+    private func placeDisk(_ disk: Disk, atX x: Int, y: Int, animated isAnimated: Bool, completion: ((Bool) -> Void)? = nil) throws {
         let diskCoordinates = flippedDiskCoordinatesByPlacingDisk(disk, atX: x, y: y)
         if diskCoordinates.isEmpty {
             throw DiskPlacementError(disk: disk, x: x, y: y)
@@ -265,7 +265,7 @@ extension ReversiEngine {
         waitForPlayer()
     }
     /// ゲームの状態を初期化し、新しいゲームを開始します。
-    func newGame() {
+    private func newGame() {
         board.reset()
         turn = .dark
         darkPlayer = .manual
@@ -290,7 +290,7 @@ extension ReversiEngine {
     /// プレイヤーの行動後、そのプレイヤーのターンを終了して次のターンを開始します。
     /// もし、次のプレイヤーに有効な手が存在しない場合、パスとなります。
     /// 両プレイヤーに有効な手がない場合、ゲームの勝敗を表示します。
-    func nextTurn() {
+    private func nextTurn() {
         guard var turn = self.turn else { return }
 
         turn.flip()
@@ -315,7 +315,7 @@ extension ReversiEngine {
     }
     
     /// "Computer" が選択されている場合のプレイヤーの行動を決定します。
-    func playTurnOfComputer() {
+    private func playTurnOfComputer() {
         
         guard let turn = self.turn else { preconditionFailure() }
         let (x, y) = validMoves(for: turn).randomElement()!
@@ -465,7 +465,7 @@ extension ReversiEngine {
     }
 }
 
-final class Canceller {
+private final class Canceller {
     private(set) var isCancelled: Bool = false
     private let body: (() -> Void)?
     
@@ -480,7 +480,7 @@ final class Canceller {
     }
 }
 
-struct DiskPlacementError: Error {
+private struct DiskPlacementError: Error {
     let disk: Disk
     let x: Int
     let y: Int
