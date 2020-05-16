@@ -464,7 +464,7 @@
                                                 <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="fMj-Bz-VYt">
                                                     <rect key="frame" x="-2" y="-2" width="42" height="24"/>
                                                     <connections>
-                                                        <action selector="changePlayerSwitch:" target="XfG-lQ-9wD" id="9GX-Ew-aBK"/>
+                                                        <action selector="changePlayer:" target="XfG-lQ-9wD" id="mwg-Ai-eBv"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -535,7 +535,7 @@
                                                 <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="sn8-RL-Xgb">
                                                     <rect key="frame" x="-2" y="-2" width="42" height="24"/>
                                                     <connections>
-                                                        <action selector="changePlayerSwitch:" target="XfG-lQ-9wD" id="QcJ-kF-jip"/>
+                                                        <action selector="changePlayer:" target="XfG-lQ-9wD" id="PcD-RR-oTT"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
