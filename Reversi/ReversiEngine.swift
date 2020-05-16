@@ -25,8 +25,10 @@ final class ReversiEngine {
     
     weak var delegate: ReversiEngineDelegate?
     
-    @Published private(set) var counts: (Int, Int) = (0, 0)
+    /// 双方のディスクの数
+    @Published private(set) var counts: (dark: Int, light: Int) = (0, 0)
     
+    /// Dark側のPlayer
     @Published var darkPlayer: Player = .manual {
         
         didSet {
@@ -36,6 +38,7 @@ final class ReversiEngine {
             }
         }
     }
+    /// Light側のPlayer
     @Published var lightPlayer: Player = .manual {
            
            didSet {
@@ -60,6 +63,7 @@ final class ReversiEngine {
         board.delegate = self
     }
     
+    /// 現在のターンのPlayer
     var currentPlayer: Player? {
         
         switch turn {
@@ -73,7 +77,7 @@ final class ReversiEngine {
 // MARK: Reversi logics
 extension ReversiEngine {
     
-    /// New
+    /// ディスクの数を更新
     private func updateCounts() {
         
         counts = (countDisks(of: .dark), countDisks(of: .light))
