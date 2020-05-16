@@ -1,6 +1,11 @@
-import UIKit
 
-public class DiskView: UIView {
+#if os(iOS)
+import UIKit
+#elseif os(macOS)
+import Cocoa
+#endif
+
+public class DiskView: PlatformView {
     /// このビューが表示するディスクの色を決定します。
     public var disk: Disk = .dark {
         didSet { setNeedsDisplay() }
@@ -28,22 +33,22 @@ public class DiskView: UIView {
     }
 
     override public func draw(_ rect: CGRect) {
-        guard let context = UIGraphicsGetCurrentContext() else { return }
+        guard let context = CGContext.current else { return }
         context.setFillColor(disk.cgColor)
         context.fillEllipse(in: bounds)
     }
 }
 
 extension Disk {
-    fileprivate var uiColor: UIColor {
+    fileprivate var color: Color {
         switch self {
-        case .dark: return UIColor(named: "DarkColor")!
-        case .light: return UIColor(named: "LightColor")!
+        case .dark: return Color(named: "DarkColor")!
+        case .light: return Color(named: "LightColor")!
         }
     }
     
     fileprivate var cgColor: CGColor {
-        uiColor.cgColor
+        color.cgColor
     }
     
     fileprivate var name: String {

@@ -6,17 +6,6 @@
 //  Copyright © 2020 Yuta Koshizawa. All rights reserved.
 //
 
-
-#if os(iOS)
-import UIKit
-
-public typealias PlatformView = UIView
-#elseif os(macOS)
-import AppKit
-
-public typealias PlatformView = NSView
-#endif
-
 public protocol BoardDelegate: AnyObject {
     /// `board` の `x`, `y` で指定されるセルがタップされたときに呼ばれます。
     /// - Parameter board: セルをタップされた `Board` インスタンスです。
