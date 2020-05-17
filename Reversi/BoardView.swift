@@ -146,21 +146,19 @@ public class BoardView: PlatformView, Board {
         return cellViews[coordinate.y * width + coordinate.x]
     }
     
-    /// `x`, `y` で指定されたセルの状態を返します。
+    /// `coordinate` で指定されたセルの状態を返します。
     /// セルにディスクが置かれていない場合、 `nil` が返されます。
-    /// - Parameter x: セルの列です。
-    /// - Parameter y: セルの行です。
+    /// - Parameter coordinate: セルの座標です。
     /// - Returns: セルにディスクが置かれている場合はそのディスクの値を、置かれていない場合は `nil` を返します。
     public func diskAt(_ coordinate: Board.Coordinate) -> Disk? {
         cellViewAt(coordinate)?.disk
     }
     
-    /// `x`, `y` で指定されたセルの状態を、与えられた `disk` に変更します。
+    /// `coordinate` で指定されたセルの状態を、与えられた `disk` に変更します。
     /// `animated` が `true` の場合、アニメーションが実行されます。
     /// アニメーションの完了通知は `completion` ハンドラーで受け取ることができます。
     /// - Parameter disk: セルに設定される新しい状態です。 `nil` はディスクが置かれていない状態を表します。
-    /// - Parameter x: セルの列です。
-    /// - Parameter y: セルの行です。
+    /// - Parameter coordinate: セルの座標です。
     /// - Parameter animated: セルの状態変更を表すアニメーションを表示するかどうかを指定します。
     /// - Parameter completion: アニメーションの完了通知を受け取るハンドラーです。
     ///     `animated` に `false` が指定された場合は状態が変更された後で即座に同期的に呼び出されます。

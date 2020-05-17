@@ -155,10 +155,9 @@ extension ReversiEngine {
         return directions.filter(canFlip(_:)).flatMap(flippedCoordinates(by:))
     }
     
-    /// `x`, `y` で指定されたセルに、 `disk` が置けるかを調べます。
+    /// `coordinate` で指定されたセルに、 `disk` が置けるかを調べます。
     /// ディスクを置くためには、少なくとも 1 枚のディスクをひっくり返せる必要があります。
-    /// - Parameter x: セルの列です。
-    /// - Parameter y: セルの行です。
+    /// - Parameter coordinate: セルの座標です。
     /// - Returns: 指定されたセルに `disk` を置ける場合は `true` を、置けない場合は `false` を返します。
     private func canPlaceDisk(_ disk: Disk, at coordinate: Board.Coordinate) -> Bool {
         
@@ -172,9 +171,8 @@ extension ReversiEngine {
         board.allCells.filter { coordinate in canPlaceDisk(side, at: coordinate) }
     }
     
-    /// `x`, `y` で指定されたセルに `disk` を置きます。
-    /// - Parameter x: セルの列です。
-    /// - Parameter y: セルの行です。
+    /// `coordinate` で指定されたセルに `disk` を置きます。
+    /// - Parameter coordinate: セルの座標です。
     /// - Parameter isAnimated: ディスクを置いたりひっくり返したりするアニメーションを表示するかどうかを指定します。
     /// - Parameter completion: アニメーション完了時に実行されるクロージャです。
     ///     このクロージャは値を返さず、アニメーションが完了したかを示す真偽値を受け取ります。
@@ -357,8 +355,7 @@ extension ReversiEngine {
 extension ReversiEngine: BoardDelegate {
     /// `board` の `x`, `y` で指定されるセルがタップされたときに呼ばれます。
     /// - Parameter board: セルをタップされた `Board` インスタンスです。
-    /// - Parameter x: セルの列です。
-    /// - Parameter y: セルの行です。
+    /// - Parameter coordinate: セルの座標です。
     func boardView(_ board: Board, didSelectCellAt coordinate: Board.Coordinate) {
         
         guard let turn = turn else { return }
