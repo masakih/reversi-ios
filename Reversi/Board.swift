@@ -14,6 +14,21 @@ public protocol BoardDelegate: AnyObject {
     func boardView(_ board: Board, didSelectCellAtX x: Int, y: Int)
 }
 
+public func + (lhs: Board.Coordinate, rhs: Board.Coordinate) -> Board.Coordinate {
+    
+    (lhs.x + rhs.x, lhs.y + rhs.y)
+}
+
+public func - (lhs: Board.Coordinate, rhs: Board.Coordinate) -> Board.Coordinate {
+    
+    (lhs.x - rhs.x, lhs.y - rhs.y)
+}
+
+public func * (lhs: Int, rhs: Board.Coordinate) -> Board.Coordinate {
+    
+    (lhs * rhs.x, lhs * rhs.y)
+}
+
 public protocol Board: PlatformView {
     
     /// セルの座標を表す
