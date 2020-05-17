@@ -147,7 +147,7 @@ extension ReversiEngine {
         /// 指定する方向はひっくり返せることが分かっていなければならない
         func flippedCoordinates(by direction: (x: Int, y: Int)) -> [Board.Coordinate] {
             
-            (1...10).lazy
+            (1..<max(board.width, board.height)).lazy
                 .map { coordinate + $0 * direction }
                 .prefix { coordinate in board.diskAt(coordinate) != disk }
         }
