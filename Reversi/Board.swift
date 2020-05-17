@@ -14,21 +14,6 @@ public protocol BoardDelegate: AnyObject {
     func boardView(_ board: Board, didSelectCellAt coordinate: Board.Coordinate)
 }
 
-public func + (lhs: Board.Coordinate, rhs: Board.Coordinate) -> Board.Coordinate {
-    
-    (lhs.x + rhs.x, lhs.y + rhs.y)
-}
-
-public func - (lhs: Board.Coordinate, rhs: Board.Coordinate) -> Board.Coordinate {
-    
-    (lhs.x - rhs.x, lhs.y - rhs.y)
-}
-
-public func * (lhs: Int, rhs: Board.Coordinate) -> Board.Coordinate {
-    
-    (lhs * rhs.x, lhs * rhs.y)
-}
-
 public protocol Board: PlatformView {
     
     /// セルの座標を表す
@@ -78,4 +63,19 @@ public protocol Board: PlatformView {
     
     /// ボードをリセットする
     func reset()
+}
+
+public func + (lhs: Board.Coordinate, rhs: Board.Coordinate) -> Board.Coordinate {
+    
+    (lhs.x + rhs.x, lhs.y + rhs.y)
+}
+
+public func - (lhs: Board.Coordinate, rhs: Board.Coordinate) -> Board.Coordinate {
+    
+    (lhs.x - rhs.x, lhs.y - rhs.y)
+}
+
+public func * (lhs: Int, rhs: Board.Coordinate) -> Board.Coordinate {
+    
+    (lhs * rhs.x, lhs * rhs.y)
 }
