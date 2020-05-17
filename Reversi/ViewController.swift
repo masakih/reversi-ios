@@ -108,7 +108,7 @@ class ViewController: UIViewController, ReversiViewControllerProtocol {
         
         if viewHasAppeared { return }
         viewHasAppeared = true
-        reversiEngine.waitForPlayer()
+        reversiEngine.resume()
     }
 }
 

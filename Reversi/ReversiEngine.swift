@@ -256,6 +256,12 @@ extension ReversiEngine {
         }
     }
     
+    /// ゲームを再開する
+    func resume() {
+        
+        waitForPlayer()
+    }
+    
     /// リセットを行う
     func reset() {
         
@@ -277,7 +283,7 @@ extension ReversiEngine {
     }
     
     /// プレイヤーの行動を待ちます。
-    func waitForPlayer() {
+    private func waitForPlayer() {
         guard let player = self.currentPlayer else { return }
         switch player {
         case .manual:
