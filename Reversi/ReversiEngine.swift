@@ -89,7 +89,7 @@ extension ReversiEngine {
     private func countDisks(of side: Disk) -> Int {
 
         board.allCells
-            .filter { vector in board.diskAt(x: vector.0, y: vector.1) == side  }
+            .filter { coordinate in board.diskAt(coordinate) == side  }
             .count
     }
     
@@ -107,7 +107,8 @@ extension ReversiEngine {
         }
     }
     
-    private func flippedDiskCoordinatesByPlacingDisk(_ disk: Disk, atX x: Int, y: Int) -> [(Int, Int)] {
+    private func flippedDiskCoordinatesByPlacingDisk(_ disk: Disk, at coordinate: Board.Coordinate) -> [Board.Coordinate] {
+        
         let directions = [
             (x: -1, y: -1),
             (x:  0, y: -1),
@@ -119,36 +120,36 @@ extension ReversiEngine {
             (x: -1, y:  1),
         ]
         
-        guard board.diskAt(x: x, y: y) == nil else {
+        guard board.diskAt(coordinate) == nil else {
             return []
         }
         
         /// その方向がひっくり返せるかを調べる
         func canFlip(_ direction: (x: Int, y: Int)) -> Bool {
             
-            func searchSame(x: Int, y: Int) -> Bool {
+            func searchSame(_ coordinate: Board.Coordinate) -> Bool {
                 
-                let (x, y) = (x + direction.x, y + direction.y)
-                guard let targetDisk = board.diskAt(x: x, y: y) else { return false }
+                let next = coordinate + direction
+                guard let targetDisk = board.diskAt(next) else { return false }
                 if targetDisk == disk { return true }
                 
-                return searchSame(x: x, y: y)
+                return searchSame(next)
             }
             
-            let (x, y) = (x + direction.x, y + direction.y)
-            guard let targetDisk = board.diskAt(x: x, y: y) else { return false }
+            let next = coordinate + direction
+            guard let targetDisk = board.diskAt(next) else { return false }
             if targetDisk == disk { return false }
             
-            return searchSame(x: x, y: y)
+            return searchSame(next)
         }
         
         /// その方向でひっくり返せるコマの座標の配列を返す
         /// 指定する方向はひっくり返せることが分かっていなければならない
-        func flippedCoordinates(by direction: (x: Int, y: Int)) -> [(Int, Int)] {
+        func flippedCoordinates(by direction: (x: Int, y: Int)) -> [Board.Coordinate] {
             
             (1...10).lazy
-                .map { (x + direction.x * $0, y + direction.y * $0) }
-                .prefix { coordinate in board.diskAt(x: coordinate.0, y: coordinate.1) != disk }
+                .map { coordinate + $0 * direction }
+                .prefix { coordinate in board.diskAt(coordinate) != disk }
         }
         
         return directions.filter(canFlip(_:)).flatMap(flippedCoordinates(by:))
@@ -159,16 +160,16 @@ extension ReversiEngine {
     /// - Parameter x: セルの列です。
     /// - Parameter y: セルの行です。
     /// - Returns: 指定されたセルに `disk` を置ける場合は `true` を、置けない場合は `false` を返します。
-    private func canPlaceDisk(_ disk: Disk, atX x: Int, y: Int) -> Bool {
-        !flippedDiskCoordinatesByPlacingDisk(disk, atX: x, y: y).isEmpty
+    private func canPlaceDisk(_ disk: Disk, at coordinate: Board.Coordinate) -> Bool {
+        
+        !flippedDiskCoordinatesByPlacingDisk(disk, at: coordinate).isEmpty
     }
     
     /// `side` で指定された色のディスクを置ける盤上のセルの座標をすべて返します。
     /// - Returns: `side` で指定された色のディスクを置ける盤上のすべてのセルの座標の配列です。
-    private func validMoves(for side: Disk) -> [(x: Int, y: Int)] {
+    private func validMoves(for side: Disk) -> [Board.Coordinate] {
         
-        board.allCells
-            .filter { vector in canPlaceDisk(side, atX: vector.0, y: vector.1) }
+        board.allCells.filter { coordinate in canPlaceDisk(side, at: coordinate) }
     }
     
     /// `x`, `y` で指定されたセルに `disk` を置きます。
@@ -179,10 +180,11 @@ extension ReversiEngine {
     ///     このクロージャは値を返さず、アニメーションが完了したかを示す真偽値を受け取ります。
     ///     もし `animated` が `false` の場合、このクロージャは次の run loop サイクルの初めに実行されます。
     /// - Throws: もし `disk` を `x`, `y` で指定されるセルに置けない場合、 `DiskPlacementError` を `throw` します。
-    private func placeDisk(_ disk: Disk, atX x: Int, y: Int, animated isAnimated: Bool, completion: ((Bool) -> Void)? = nil) throws {
-        let diskCoordinates = flippedDiskCoordinatesByPlacingDisk(disk, atX: x, y: y)
+    private func placeDisk(_ disk: Disk, at coordinate: Board.Coordinate, animated isAnimated: Bool, completion: ((Bool) -> Void)? = nil) throws {
+        
+        let diskCoordinates = flippedDiskCoordinatesByPlacingDisk(disk, at: coordinate)
         if diskCoordinates.isEmpty {
-            throw DiskPlacementError(disk: disk, x: x, y: y)
+            throw DiskPlacementError(disk: disk, x: coordinate.x, y: coordinate.y)
         }
         
         if isAnimated {
@@ -190,7 +192,7 @@ extension ReversiEngine {
                 self?.animationCanceller = nil
             }
             animationCanceller = Canceller(cleanUp)
-            animateSettingDisks(at: [(x, y)] + diskCoordinates, to: disk) { [weak self] isFinished in
+            animateSettingDisks(at: [coordinate] + diskCoordinates, to: disk) { [weak self] isFinished in
                 guard let self = self else { return }
                 guard let canceller = self.animationCanceller else { return }
                 if canceller.isCancelled { return }
@@ -203,9 +205,9 @@ extension ReversiEngine {
         } else {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.board.setDisk(disk, atX: x, y: y, animated: false)
-                for (x, y) in diskCoordinates {
-                    self.board.setDisk(disk, atX: x, y: y, animated: false)
+                self.board.setDisk(disk, at: coordinate, animated: false)
+                for coordinate in diskCoordinates {
+                    self.board.setDisk(disk, at: coordinate, animated: false)
                 }
                 completion?(true)
                 try? self.saveGame()
@@ -221,20 +223,20 @@ extension ReversiEngine {
     private func animateSettingDisks<C: Collection>(at coordinates: C, to disk: Disk, completion: @escaping (Bool) -> Void)
         where C.Element == (Int, Int)
     {
-        guard let (x, y) = coordinates.first else {
+        guard let coordinate = coordinates.first else {
             completion(true)
             return
         }
         
         let animationCanceller = self.animationCanceller!
-        board.setDisk(disk, atX: x, y: y, animated: true) { [weak self] isFinished in
+        board.setDisk(disk, at: coordinate, animated: true) { [weak self] isFinished in
             guard let self = self else { return }
             if animationCanceller.isCancelled { return }
             if isFinished {
                 self.animateSettingDisks(at: coordinates.dropFirst(), to: disk, completion: completion)
             } else {
-                for (x, y) in coordinates {
-                    self.board.setDisk(disk, atX: x, y: y, animated: false)
+                for coordinate in coordinates {
+                    self.board.setDisk(disk, at: coordinate, animated: false)
                 }
                 completion(false)
             }
@@ -324,7 +326,7 @@ extension ReversiEngine {
     private func playTurnOfComputer() {
         
         guard let turn = self.turn else { preconditionFailure() }
-        let (x, y) = validMoves(for: turn).randomElement()!
+        let coordinate = validMoves(for: turn).randomElement()!
 
         delegate?.beginComputerThinking(self, turn: turn)
         
@@ -341,7 +343,7 @@ extension ReversiEngine {
             if canceller.isCancelled { return }
             cleanUp()
             
-            try! self.placeDisk(turn, atX: x, y: y, animated: true) { [weak self] _ in
+            try! self.placeDisk(turn, at: coordinate, animated: true) { [weak self] _ in
                 self?.nextTurn()
             }
         }
@@ -357,12 +359,13 @@ extension ReversiEngine: BoardDelegate {
     /// - Parameter board: セルをタップされた `Board` インスタンスです。
     /// - Parameter x: セルの列です。
     /// - Parameter y: セルの行です。
-    func boardView(_ board: Board, didSelectCellAtX x: Int, y: Int) {
+    func boardView(_ board: Board, didSelectCellAt coordinate: Board.Coordinate) {
+        
         guard let turn = turn else { return }
         if isAnimating { return }
         guard case .manual = currentPlayer else { return }
         // try? because doing nothing when an error occurs
-        try? placeDisk(turn, atX: x, y: y, animated: true) { [weak self] _ in
+        try? placeDisk(turn, at: coordinate, animated: true) { [weak self] _ in
             self?.nextTurn()
         }
     }
@@ -387,9 +390,9 @@ extension ReversiEngine {
         board.allLines
             .forEach { line in
                 
-                line.forEach { cell in
+                line.forEach { coordinate in
                     
-                    output += board.diskAt(x: cell.0, y: cell.1).symbol
+                    output += board.diskAt(coordinate).symbol
                 }
                 output += "\n"
         }
@@ -448,7 +451,7 @@ extension ReversiEngine {
                 
                 zip(0..., diskLine).forEach { x, disk in
                     
-                    board.setDisk(disk, atX: x, y: y, animated: false)
+                    board.setDisk(disk, at: (x, y), animated: false)
                 }
             }
         }

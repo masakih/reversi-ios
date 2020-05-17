@@ -11,7 +11,7 @@ public protocol BoardDelegate: AnyObject {
     /// - Parameter board: セルをタップされた `Board` インスタンスです。
     /// - Parameter x: セルの列です。
     /// - Parameter y: セルの行です。
-    func boardView(_ board: Board, didSelectCellAtX x: Int, y: Int)
+    func boardView(_ board: Board, didSelectCellAt coordinate: Board.Coordinate)
 }
 
 public func + (lhs: Board.Coordinate, rhs: Board.Coordinate) -> Board.Coordinate {
@@ -32,9 +32,9 @@ public func * (lhs: Int, rhs: Board.Coordinate) -> Board.Coordinate {
 public protocol Board: PlatformView {
     
     /// セルの座標を表す
-    typealias Cell = (Int, Int)
+    typealias Coordinate = (x: Int, y: Int)
     /// 行の座標の配列を表す
-    typealias Line = [Cell]
+    typealias Line = [Coordinate]
     
     /// 盤の幅（ `8` ）を表します。
     var width: Int { get }
@@ -53,7 +53,7 @@ public protocol Board: PlatformView {
     
     
     /// 全てのセルの座標を表す
-    var allCells: [Cell] { get }
+    var allCells: [Coordinate] { get }
     
     /// 全ての行を表す
     var allLines: [Line] { get }
@@ -63,7 +63,7 @@ public protocol Board: PlatformView {
     /// - Parameter x: セルの列です。
     /// - Parameter y: セルの行です。
     /// - Returns: セルにディスクが置かれている場合はそのディスクの値を、置かれていない場合は `nil` を返します。
-    func diskAt(x: Int, y: Int) -> Disk?
+    func diskAt(_ coordinate: Coordinate) -> Disk?
     
     /// `x`, `y` で指定されたセルの状態を、与えられた `disk` に変更します。
     /// `animated` が `true` の場合、アニメーションが実行されます。
@@ -75,8 +75,8 @@ public protocol Board: PlatformView {
     /// - Parameter completion: アニメーションの完了通知を受け取るハンドラーです。
     ///     `animated` に `false` が指定された場合は状態が変更された後で即座に同期的に呼び出されます。
     ///     ハンドラーが受け取る `Bool` 値は、 `UIView.animate()`  等に準じます。
-    func setDisk(_ disk: Disk?, atX x: Int, y: Int, animated: Bool, completion: ((Bool) -> Void)?)
-    func setDisk(_ disk: Disk?, atX x: Int, y: Int, animated: Bool)
+    func setDisk(_ disk: Disk?, at coordinate: Coordinate, animated: Bool, completion: ((Bool) -> Void)?)
+    func setDisk(_ disk: Disk?, at coordinate: Coordinate, animated: Bool)
     
     /// ボードをリセットする
     func reset()
